@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Project Museum — Hoang Nguyen Thanh Tam: Architectural portfolio featuring Entrance Atrium, software engineering, business analysis, and SAP/ERP systems." />
+  <title>Hoang Nguyen Thanh Tam — Project Museum (Entrance Atrium)</title>
+
+  <!-- Google Fonts: Manrope, Inter, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Import Maps for Three.js (Local Vendor with CDN Fallback) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/vendor/three.module.js"
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#heroContent" class="skip-link">Skip to hero content</a>
+
+  <!-- Top Scroll Reading Track -->
+  <div class="reading-progress-bar" id="readingBar" aria-hidden="true"></div>
+
+  <!-- Persistent Three.js Canvas -->
+  <canvas id="world" role="img" aria-label="3D Glass & Light Museum entrance atrium with circular skylight and three frosted glass panels"></canvas>
+
+  <!-- Fixed Brand Header -->
+  <header class="brand-header">
+    <div class="brand-icon" aria-hidden="true">M</div>
+    <div class="brand-meta">
+      <span class="brand-title">Project Museum</span>
+      <span class="brand-subtitle">Hoang Nguyen Thanh Tam / 2026</span>
+    </div>
+  </header>
+
+  <!-- Left Hero Interface Overlay -->
+  <aside class="hero-overlay" id="heroContent" aria-label="Introduction Overview">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Software Engineering · Business Analysis · SAP / ERP</div>
+      <div class="hero-name">Hoang Nguyen Thanh Tam</div>
+      <h1 class="hero-headline">Bridging Business Needs &amp; <span class="highlight">Technology Solutions.</span></h1>
+      <p class="hero-copy">
+        Software Engineering graduate interested in Business Analysis, SAP/ERP, and practical technology solutions.
+      </p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="exploreBtn" aria-label="Explore the 3D installation">
+          Explore My Work <span>↘</span>
+        </button>
+        <a href="assets/Hoang-Nguyen-Thanh-Tam-CV.pdf" class="btn btn-secondary" download="Hoang-Nguyen-Thanh-Tam-CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download Curriculum Vitae in PDF">
+          Download CV <span>↓</span>
+        </a>
+      </div>
+      <div class="hero-badge">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>SCENE 01 / ENTRANCE ATRIUM · GLASS &amp; LIGHT MUSEUM</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Fixed Vertical Navigation (Right Zone) -->
+  <nav class="vertical-nav" aria-label="Museum Section Navigation">
+    <div class="nav-header">
+      <span>CHAPTERS</span>
+      <span id="scrollPercent">00%</span>
+    </div>
+    <ul class="nav-list" role="list">
+      <li>
+        <button type="button" class="nav-item is-active" id="navIntro" aria-current="step">
+          <span class="nav-num">01</span>
+          <span class="nav-label">Introduction</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item" aria-disabled="true" tabindex="-1">
+          <span class="nav-num">02</span>
+          <span class="nav-label">About</span>
+          <span class="nav-status-tag">UPCOMING</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item" aria-disabled="true" tabindex="-1">
+          <span class="nav-num">03</span>
+          <span class="nav-label">Expertise</span>
+          <span class="nav-status-tag">UPCOMING</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item" aria-disabled="true" tabindex="-1">
+          <span class="nav-num">04</span>
+          <span class="nav-label">Projects</span>
+          <span class="nav-status-tag">UPCOMING</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item" aria-disabled="true" tabindex="-1">
+          <span class="nav-num">05</span>
+          <span class="nav-label">Experience</span>
+          <span class="nav-status-tag">UPCOMING</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item" aria-disabled="true" tabindex="-1">
+          <span class="nav-num">06</span>
+          <span class="nav-label">Contact</span>
+          <span class="nav-status-tag">UPCOMING</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Bottom Scroll Hint -->
+  <div class="scroll-hint" aria-hidden="true">
+    <span class="scroll-hint-indicator"></span>
+    <span>SCROLL TO EXPLORE ATRIUM ↘</span>
+  </div>
+
+  <!-- Native Scroll Track Container -->
+  <main class="scroll-container" aria-hidden="true"></main>
+
+  <!-- Application Controller -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
