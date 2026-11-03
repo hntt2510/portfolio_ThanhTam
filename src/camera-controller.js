@@ -1,12 +1,12 @@
 /**
  * Camera Motion Controller for Milestone 01: Entrance Atrium
- * Faithful to Camera Motion Ledger V1 & Spatial Blueprint:
- *  - K01 (0.00 - 0.25): Establishing Shot (wide entrance, circular skylight + atrium volume)
- *  - K02 (0.25 - 0.50): Forward Dolly (smooth perspective advance toward pedestal)
- *  - K03 (0.50 - 0.75): Installation Focus (side arc revealing thickness, depth & refraction)
- *  - K04 (0.75 - 1.00): Transition Alignment (framing top-right curved corridor to Profile Gallery)
+ * Reconciled with Blender Graybox (Milestone 01A) & Camera Motion Ledger:
+ *  - K01 (p = 0.00): Establishing Shot (wide entrance threshold, circular skylight + atrium volume)
+ *  - K02 (p = 0.33): Forward Dolly (smooth perspective advance toward plinth)
+ *  - K03 (p = 0.66): Installation Focus (oblique angle revealing panel depth, thickness & refraction)
+ *  - K04 (p = 1.00): Transition Alignment (framing North-East corridor to Profile Gallery)
  *
- * 100% Reversible, deterministic Catmull-Rom spline path with zero text occlusion.
+ * 100% Reversible, deterministic Catmull-Rom spline trajectory with zero text occlusion.
  */
 
 import * as THREE from 'three';
@@ -17,37 +17,39 @@ export class CameraController {
     this.currentPosition = new THREE.Vector3();
     this.currentTarget = new THREE.Vector3();
 
-    // Desktop waypoints matching reference board:
-    // Installation is centered at X = 1.8, perfectly balancing the screen between left Hero and right Nav.
+    // Desktop waypoints matching verified Blender Graybox specs (converted to Three.js Y-up)
+    // Blender mapping: X_three = X_blender, Y_three = Z_blender, Z_three = -Y_blender
     this.desktopWaypoints = {
       positions: [
-        new THREE.Vector3(0.0, 2.3, 13.5),   // K01 Establishing Shot
-        new THREE.Vector3(0.8, 1.9, 8.5),    // K02 Forward Dolly
-        new THREE.Vector3(4.2, 1.8, 5.0),    // K03 Installation Focus (Right arc)
-        new THREE.Vector3(7.2, 2.2, -5.2)    // K04 Corridor Transition (aligned with doorway)
+        new THREE.Vector3(0.00, 1.90, 10.20),   // K01 Establishing (from Blender (0.0, -10.2, 1.9))
+        new THREE.Vector3(0.70, 1.85, 4.80),    // K02 Forward Dolly (from Blender (0.7, -4.5, 1.85))
+        new THREE.Vector3(0.60, 1.75, 3.60),    // K03 Installation Focus (three-quarters staggered angle)
+        new THREE.Vector3(4.80, 1.80, -4.80)    // K04 Corridor Transition (from Blender (4.8, 4.8, 1.8))
       ],
       targets: [
-        new THREE.Vector3(1.8, 2.6, 0.0),    // K01 Target
-        new THREE.Vector3(1.8, 2.1, 0.0),    // K02 Target
-        new THREE.Vector3(1.8, 1.8, 0.0),    // K03 Target
-        new THREE.Vector3(12.5, 2.2, -12.0)  // K04 Target (looking through arched portal)
-      ]
+        new THREE.Vector3(1.00, 2.90, -0.20),   // K01 Target (aimed right-center to protect left Hero space)
+        new THREE.Vector3(1.40, 1.70, 0.00),    // K02 Target (centered on plinth at X=1.4)
+        new THREE.Vector3(1.45, 1.65, 0.00),    // K03 Target (focused on monolith cluster)
+        new THREE.Vector3(12.00, 1.80, -12.00)  // K04 Target (looking down North-East passage)
+      ],
+      fovs: [57.0, 46.0, 42.0, 48.0]
     };
 
-    // Mobile waypoints (centered on X = 1.8)
+    // Mobile waypoints optimized for portrait aspect ratios (aspect < 1.0)
     this.mobileWaypoints = {
       positions: [
-        new THREE.Vector3(1.8, 4.8, 14.5),   // K01 Mobile
-        new THREE.Vector3(1.8, 3.6, 9.5),    // K02 Mobile
-        new THREE.Vector3(3.2, 2.8, 6.0),    // K03 Mobile
-        new THREE.Vector3(6.2, 2.4, -4.0)    // K04 Mobile
+        new THREE.Vector3(0.40, 2.30, 12.80),   // K01 Mobile: pulled back to frame atrium in portrait
+        new THREE.Vector3(0.85, 2.00, 6.50),    // K02 Mobile
+        new THREE.Vector3(0.60, 1.75, 4.20),    // K03 Mobile
+        new THREE.Vector3(4.80, 1.80, -4.80)    // K04 Mobile
       ],
       targets: [
-        new THREE.Vector3(1.8, 1.8, 0.0),
-        new THREE.Vector3(1.8, 1.6, 0.0),
-        new THREE.Vector3(1.8, 1.6, 0.0),
-        new THREE.Vector3(11.5, 2.2, -11.0)
-      ]
+        new THREE.Vector3(1.20, 2.70, 0.00),
+        new THREE.Vector3(1.40, 1.75, 0.00),
+        new THREE.Vector3(1.45, 1.65, 0.00),
+        new THREE.Vector3(12.00, 1.80, -12.00)
+      ],
+      fovs: [58.0, 48.0, 44.0, 50.0]
     };
 
     this.isMobile = false;
@@ -67,8 +69,22 @@ export class CameraController {
     this.targetCurve = new THREE.CatmullRomCurve3(wp.targets, false, 'centripetal');
   }
 
+  getInterpolatedFov(p) {
+    const fovs = this.isMobile ? this.mobileWaypoints.fovs : this.desktopWaypoints.fovs;
+    if (p <= 0.333) {
+      const t = p / 0.333;
+      return THREE.MathUtils.lerp(fovs[0], fovs[1], t);
+    } else if (p <= 0.667) {
+      const t = (p - 0.333) / 0.334;
+      return THREE.MathUtils.lerp(fovs[1], fovs[2], t);
+    } else {
+      const t = (p - 0.667) / 0.333;
+      return THREE.MathUtils.lerp(fovs[2], fovs[3], t);
+    }
+  }
+
   /**
-   * Update camera position and lookAt based on normalized progress p in [0, 1]
+   * Update camera position, lookAt, and FOV based on normalized progress p in [0, 1]
    * @param {number} p - Normalized scene progress [0, 1]
    */
   update(p) {
@@ -78,5 +94,11 @@ export class CameraController {
 
     this.camera.position.copy(this.currentPosition);
     this.camera.lookAt(this.currentTarget);
+
+    const targetFov = this.getInterpolatedFov(clampedP);
+    if (Math.abs(this.camera.fov - targetFov) > 0.05) {
+      this.camera.fov = targetFov;
+      this.camera.updateProjectionMatrix();
+    }
   }
 }

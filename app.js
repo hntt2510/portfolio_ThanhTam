@@ -17,6 +17,7 @@ class App {
     this.progress = 0;
     this.world = null;
 
+    window.__app = this;
     this.init();
   }
 
@@ -66,10 +67,10 @@ class App {
 
     // Softly reduce hero emphasis as we transition into K04 corridor handoff
     if (this.heroContent) {
-      if (this.progress > 0.62) {
-        const fade = Math.max(0.15, 1.0 - ((this.progress - 0.62) / 0.38) * 0.82);
+      if (this.progress > 0.55) {
+        const fade = Math.max(0, 1.0 - ((this.progress - 0.55) / 0.38));
         this.heroContent.style.opacity = fade.toFixed(2);
-        this.heroContent.style.pointerEvents = this.progress > 0.85 ? 'none' : 'auto';
+        this.heroContent.style.pointerEvents = this.progress > 0.80 ? 'none' : 'auto';
       } else {
         this.heroContent.style.opacity = '1';
         this.heroContent.style.pointerEvents = 'auto';
@@ -78,11 +79,11 @@ class App {
   }
 
   bindInteractions() {
-    // Primary CTA: Explore My Work -> scrolls smoothly to K03 Installation Focus (progress = 0.50)
+    // Primary CTA: Explore My Work -> scrolls smoothly to K03 Installation Focus (progress = 0.66)
     if (this.exploreBtn) {
       this.exploreBtn.addEventListener('click', () => {
         const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-        const targetScroll = maxScroll * 0.50; // K03 Installation focus position
+        const targetScroll = maxScroll * 0.66; // K03 Installation focus position
         window.scrollTo({
           top: targetScroll,
           behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'

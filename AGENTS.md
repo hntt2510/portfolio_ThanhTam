@@ -53,7 +53,7 @@ Update `PROJECT_STATUS.md` in the same commit whenever practical.
 
 - Milestone 01: Entrance Atrium initial Three.js implementation — committed.
 - Milestone 01A: Blender graybox, GLB, generator and reference renders — committed; quality acceptance is separate.
-- Milestone 01B: Integrate the GLB into the existing persistent Three.js world, reconcile Blender/Three.js camera coordinates, and test responsive scroll behavior — next.
+- Milestone 01B: Integrate the GLB into the existing persistent Three.js world, reconcile Blender/Three.js camera coordinates, and test responsive scroll behavior — completed.
 - Later scenes: Profile Gallery, Expertise, three Project Exhibition chapters, Experience Corridor and Let's Connect.
 
 Do not confuse a commit with verified visual acceptance.

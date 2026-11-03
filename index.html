@@ -11,11 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Import Maps for Three.js (Local Vendor with CDN Fallback) -->
+  <!-- Import Maps for Three.js (Local Vendor) -->
   <script type="importmap">
     {
       "imports": {
-        "three": "./assets/vendor/three.module.js"
+        "three": "./assets/vendor/three.module.js",
+        "three/addons/loaders/GLTFLoader.js": "./assets/vendor/GLTFLoader.js",
+        "three/addons/utils/BufferGeometryUtils.js": "./assets/vendor/BufferGeometryUtils.js"
       }
     }
   </script>

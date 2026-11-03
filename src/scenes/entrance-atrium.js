@@ -1,30 +1,30 @@
 /**
- * Milestone 01: Entrance Atrium Scene
- * Faithful to Glass & Light Museum Specification & Reference Boards:
- *  - Circular Atrium with stepped ceiling cove lighting
- *  - Grand circular domed skylight overhead casting natural daylight
- *  - Curved two-tier architectural walls with rhythmic vertical pilasters
- *  - Polished light-stone floor with soft reflections and ambient expansion joints
- *  - Central installation: low circular stone pedestal, subtle LED halo ring,
- *    and three monolithic frosted-glass blocks with crystal-clear refractive edges
- *  - Top-right curved corridor leading to future Profile Gallery (Wayfinding 04)
+ * Milestone 01B: Entrance Atrium Scene
+ * Integrates Blender GLB model (entrance-atrium.glb) into Three.js world:
+ *  - Native GLB architecture: circular floor, double-height curved walls, perimeter pilasters,
+ *    mezzanine balcony with glass railing, stepped ceiling soffits, and 12-mullion oculus skylight.
+ *  - Central installation: low circular pedestal plinth, blue LED halo ring, and three staggered
+ *    frosted-glass monoliths with physical transmission, thickness, and aluminum frames.
+ *  - Top-right curved corridor with cove lighting leading to future Profile Gallery.
+ *  - High-resolution typography decals for Business Analysis, Enterprise Systems, and Technology Solutions.
+ *  - Preserves approved Glass & Light Museum aesthetic and lighting language.
  */
 
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 export class EntranceAtriumScene {
-  constructor() {
+  constructor(onLoadedCallback = null) {
     this.group = new THREE.Group();
     this.materials = [];
     this.geometries = [];
     this.textures = [];
+    this.onLoaded = onLoadedCallback;
+    this.isLoaded = false;
 
     this.initColors();
-    this.buildAtriumStructure();
-    this.buildSkylightAndCeiling();
-    this.buildCentralInstallation();
-    this.buildCorridorPortal();
     this.setupNaturalLighting();
+    this.loadGlbModel();
   }
 
   initColors() {
@@ -42,387 +42,278 @@ export class EntranceAtriumScene {
     };
   }
 
-  buildAtriumStructure() {
-    // 1. Polished light-stone floor
-    const floorR = 22;
-    const floorGeo = new THREE.CylinderGeometry(floorR, floorR, 0.4, 64);
-    this.geometries.push(floorGeo);
-    const floorMat = new THREE.MeshStandardMaterial({
-      color: this.colors.lightStone,
-      roughness: 0.38, // Realistic soft stone sheen
-      metalness: 0.08
-    });
-    this.materials.push(floorMat);
-    const floor = new THREE.Mesh(floorGeo, floorMat);
-    floor.position.y = -0.2;
-    floor.receiveShadow = true;
-    this.group.add(floor);
+  setupNaturalLighting() {
+    // 1. Ambient baseline light for pristine, non-muddy architectural surfaces
+    const ambientLight = new THREE.AmbientLight(0xFFFDF8, 1.25);
+    this.group.add(ambientLight);
 
-    // Subtle concentric stone joint rings on the floor
-    const jointMat = new THREE.MeshBasicMaterial({ color: 0xD9DDD7 });
-    this.materials.push(jointMat);
-    [5.5, 9.0, 13.0, 17.0].forEach(r => {
-      const ringGeo = new THREE.RingGeometry(r - 0.02, r + 0.02, 64);
-      this.geometries.push(ringGeo);
-      const ringMesh = new THREE.Mesh(ringGeo, jointMat);
-      ringMesh.rotation.x = -Math.PI / 2;
-      ringMesh.position.y = 0.005;
-      this.group.add(ringMesh);
-    });
+    // 2. Natural sunlight pouring through circular oculus skylight
+    const daylight = new THREE.DirectionalLight(0xFFFFFF, 2.2);
+    daylight.position.set(3.0, 18.0, 5.0);
+    daylight.castShadow = true;
+    daylight.shadow.mapSize.width = 2048;
+    daylight.shadow.mapSize.height = 2048;
+    daylight.shadow.camera.near = 1.0;
+    daylight.shadow.camera.far = 32.0;
+    daylight.shadow.camera.left = -9;
+    daylight.shadow.camera.right = 9;
+    daylight.shadow.camera.top = 9;
+    daylight.shadow.camera.bottom = -9;
+    daylight.shadow.bias = -0.0003;
+    daylight.shadow.normalBias = 0.02;
+    this.group.add(daylight);
 
-    // 2. Curved Atrium Walls (Double-height museum cylinder)
-    const atriumR = 15.5;
-    const wallH = 10.5;
-    const wallMat = new THREE.MeshStandardMaterial({
-      color: this.colors.ivoryPlaster,
-      roughness: 0.85,
-      metalness: 0.02,
-      side: THREE.BackSide
-    });
-    this.materials.push(wallMat);
+    // 3. Soft sky ambient fill
+    const hemiLight = new THREE.HemisphereLight(this.colors.skyLight, 0xF5F2ED, 1.2);
+    hemiLight.position.set(0, 14, 0);
+    this.group.add(hemiLight);
 
-    // Wall with opening for exit corridor at angle ~30° to 55° (top-right)
-    const wallGeo = new THREE.CylinderGeometry(
-      atriumR, atriumR, wallH, 64, 1, true,
-      0.95, Math.PI * 2 - 0.55
-    );
-    this.geometries.push(wallGeo);
-    const wall = new THREE.Mesh(wallGeo, wallMat);
-    wall.position.y = wallH / 2;
-    wall.receiveShadow = true;
-    this.group.add(wall);
+    // 4. Subtle accent point light near monolith installation for soft glass specular highlights
+    const glassLight = new THREE.PointLight(this.colors.iceBlue, 0.9, 14);
+    glassLight.position.set(1.4, 3.2, 2.2);
+    this.group.add(glassLight);
 
-    // 3. Rhythmic architectural vertical pilasters around the perimeter
-    const pilasterGeo = new THREE.BoxGeometry(0.55, wallH, 0.45);
-    this.geometries.push(pilasterGeo);
-    const pilasterMat = new THREE.MeshStandardMaterial({
-      color: this.colors.warmWhite,
-      roughness: 0.75,
-      metalness: 0.04
-    });
-    this.materials.push(pilasterMat);
+    // 5. Warm ambient fill light inside corridor for transition vista (K04)
+    const corridorLight = new THREE.PointLight(0xFDF7EE, 0.8, 14);
+    corridorLight.position.set(8.5, 2.5, -8.5);
+    this.group.add(corridorLight);
 
-    for (let i = 0; i < 16; i++) {
-      const angle = (i / 16) * Math.PI * 2;
-      // Skip doorway angle range
-      if (angle > 0.45 && angle < 1.0) continue;
-
-      const pMesh = new THREE.Mesh(pilasterGeo, pilasterMat);
-      pMesh.position.set(
-        Math.cos(angle) * (atriumR - 0.2),
-        wallH / 2,
-        Math.sin(angle) * (atriumR - 0.2)
-      );
-      pMesh.rotation.y = -angle + Math.PI / 2;
-      pMesh.receiveShadow = true;
-      pMesh.castShadow = true;
-      this.group.add(pMesh);
-    }
-
-    // 4. Curved upper gallery / mezzanine band
-    const mezR = atriumR - 0.3;
-    const mezGeo = new THREE.TorusGeometry(mezR, 0.18, 16, 64);
-    this.geometries.push(mezGeo);
-    const mezMat = new THREE.MeshStandardMaterial({
-      color: this.colors.aluminum,
-      metalness: 0.6,
-      roughness: 0.3
-    });
-    this.materials.push(mezMat);
-    const mezMesh = new THREE.Mesh(mezGeo, mezMat);
-    mezMesh.rotation.x = Math.PI / 2;
-    mezMesh.position.y = 5.2;
-    this.group.add(mezMesh);
-  }
-
-  buildSkylightAndCeiling() {
-    const wallH = 10.5;
-
-    // 1. Stepped circular ceiling soffits (Pantheon / Guggenheim inspired)
-    const stepMat = new THREE.MeshStandardMaterial({
-      color: this.colors.warmWhite,
-      roughness: 0.8,
-      side: THREE.DoubleSide
-    });
-    this.materials.push(stepMat);
-
-    // Lower ceiling ring: from atrium wall (15.5) in to radius 7.2
-    const ceil1Geo = new THREE.RingGeometry(7.2, 15.6, 64);
-    this.geometries.push(ceil1Geo);
-    const ceil1 = new THREE.Mesh(ceil1Geo, stepMat);
-    ceil1.rotation.x = Math.PI / 2;
-    ceil1.position.y = wallH;
-    this.group.add(ceil1);
-
-    // Stepped riser 1
-    const riser1Geo = new THREE.CylinderGeometry(7.2, 7.2, 0.6, 64, 1, true);
-    this.geometries.push(riser1Geo);
-    const riser1 = new THREE.Mesh(riser1Geo, stepMat);
-    riser1.position.y = wallH + 0.3;
-    this.group.add(riser1);
-
-    // Middle ceiling ring: radius 5.4 to 7.2 at height +0.6
-    const ceil2Geo = new THREE.RingGeometry(5.4, 7.2, 64);
-    this.geometries.push(ceil2Geo);
-    const ceil2 = new THREE.Mesh(ceil2Geo, stepMat);
-    ceil2.rotation.x = Math.PI / 2;
-    ceil2.position.y = wallH + 0.6;
-    this.group.add(ceil2);
-
-    // Stepped riser 2 with hidden architectural cove light
-    const riser2Geo = new THREE.CylinderGeometry(5.4, 5.4, 0.6, 64, 1, true);
-    this.geometries.push(riser2Geo);
-    const riser2 = new THREE.Mesh(riser2Geo, stepMat);
-    riser2.position.y = wallH + 0.9;
-    this.group.add(riser2);
-
-    // Glowing architectural cove light ring
-    const coveLightGeo = new THREE.TorusGeometry(5.35, 0.05, 16, 64);
-    this.geometries.push(coveLightGeo);
-    const coveMat = new THREE.MeshBasicMaterial({ color: 0xFFFDF8 });
-    this.materials.push(coveMat);
-    const coveMesh = new THREE.Mesh(coveLightGeo, coveMat);
-    coveMesh.rotation.x = Math.PI / 2;
-    coveMesh.position.y = wallH + 0.7;
-    this.group.add(coveMesh);
-
-    // 2. Grand Circular Skylight Dome & Mullions
-    const skylightR = 5.4;
-    const skylightH = wallH + 1.2;
-
-    const frameMat = new THREE.MeshStandardMaterial({
-      color: this.colors.aluminum,
-      metalness: 0.85,
-      roughness: 0.22
-    });
-    this.materials.push(frameMat);
-
-    // Outer structural ring of skylight
-    const skylightRimGeo = new THREE.TorusGeometry(skylightR, 0.1, 16, 64);
-    this.geometries.push(skylightRimGeo);
-    const skylightRim = new THREE.Mesh(skylightRimGeo, frameMat);
-    skylightRim.rotation.x = Math.PI / 2;
-    skylightRim.position.y = skylightH;
-    this.group.add(skylightRim);
-
-    // Inner concentric ring
-    const innerRimGeo = new THREE.TorusGeometry(skylightR * 0.52, 0.06, 16, 64);
-    this.geometries.push(innerRimGeo);
-    const innerRim = new THREE.Mesh(innerRimGeo, frameMat);
-    innerRim.rotation.x = Math.PI / 2;
-    innerRim.position.y = skylightH + 0.35;
-    this.group.add(innerRim);
-
-    // Radial mullions (12 ribs)
-    for (let i = 0; i < 12; i++) {
-      const angle = (i / 12) * Math.PI * 2;
-      const ribGeo = new THREE.BoxGeometry(skylightR, 0.06, 0.05);
-      this.geometries.push(ribGeo);
-      const rib = new THREE.Mesh(ribGeo, frameMat);
-      rib.position.set(
-        Math.cos(angle) * (skylightR / 2),
-        skylightH + 0.2,
-        Math.sin(angle) * (skylightR / 2)
-      );
-      rib.rotation.y = -angle;
-      rib.rotation.z = 0.07;
-      this.group.add(rib);
-    }
-
-    // Domed skylight glass showing soft blue daylight sky
-    const glassGeo = new THREE.SphereGeometry(skylightR, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.28);
-    this.geometries.push(glassGeo);
-    const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0xEEF6FD,
-      transmission: 0.90,
-      opacity: 0.85,
-      transparent: true,
-      roughness: 0.08,
-      ior: 1.48
-    });
-    this.materials.push(glassMat);
-    const glassDome = new THREE.Mesh(glassGeo, glassMat);
-    glassDome.position.y = skylightH - 0.2;
-    this.group.add(glassDome);
-
-    // Sky backdrop disc above skylight
-    const skyGeo = new THREE.CircleGeometry(skylightR * 1.5, 32);
+    // 6. Sky backdrop disc above circular skylight
+    const skyGeo = new THREE.CircleGeometry(9.0, 32);
     this.geometries.push(skyGeo);
     const skyMat = new THREE.MeshBasicMaterial({ color: 0xCFE5F8, side: THREE.DoubleSide });
     this.materials.push(skyMat);
     const skyDisc = new THREE.Mesh(skyGeo, skyMat);
     skyDisc.rotation.x = Math.PI / 2;
-    skyDisc.position.y = skylightH + 2.5;
+    skyDisc.position.set(0, 13.0, 0);
     this.group.add(skyDisc);
   }
 
-  buildCentralInstallation() {
-    const installGroup = new THREE.Group();
+  loadGlbModel() {
+    const loader = new GLTFLoader();
+    const primaryPath = './design-handoff/milestone-01A/entrance-atrium.glb';
+    const fallbackPath = './assets/models/entrance-atrium.glb';
 
-    // 1. Low circular exhibition pedestal in polished light stone/porcelain
-    const pedestalR = 3.6;
-    const pedestalH = 0.32;
-    const pedGeo = new THREE.CylinderGeometry(pedestalR, pedestalR + 0.08, pedestalH, 64);
-    this.geometries.push(pedGeo);
-    const pedMat = new THREE.MeshStandardMaterial({
-      color: 0xF4F5F2,
-      roughness: 0.35,
-      metalness: 0.06
-    });
-    this.materials.push(pedMat);
-    const pedestal = new THREE.Mesh(pedGeo, pedMat);
-    pedestal.position.y = pedestalH / 2;
-    pedestal.receiveShadow = true;
-    pedestal.castShadow = true;
-    installGroup.add(pedestal);
+    const loadAsset = (url, isFallback = false) => {
+      loader.load(
+        url,
+        (gltf) => {
+          this.processLoadedModel(gltf);
+          this.isLoaded = true;
+          if (this.onLoaded) {
+            this.onLoaded();
+          }
+        },
+        undefined,
+        (err) => {
+          console.warn(`Failed loading GLB from ${url}:`, err);
+          if (!isFallback) {
+            console.info(`Attempting fallback from ${fallbackPath}...`);
+            loadAsset(fallbackPath, true);
+          } else {
+            console.error('All GLB loading attempts failed. Retaining basic lighting.');
+          }
+        }
+      );
+    };
 
-    // Subtle brushed aluminum base trim on the pedestal
-    const pedTrimGeo = new THREE.TorusGeometry(pedestalR + 0.06, 0.025, 16, 64);
-    this.geometries.push(pedTrimGeo);
-    const pedTrimMat = new THREE.MeshStandardMaterial({
-      color: this.colors.aluminum,
-      metalness: 0.85,
-      roughness: 0.25
-    });
-    this.materials.push(pedTrimMat);
-    const pedTrim = new THREE.Mesh(pedTrimGeo, pedTrimMat);
-    pedTrim.rotation.x = Math.PI / 2;
-    pedTrim.position.y = 0.03;
-    installGroup.add(pedTrim);
+    loadAsset(primaryPath);
+  }
 
-    // Subtle blue LED halo ring around the pedestal on the floor (Reference Board feature)
-    const haloGeo = new THREE.RingGeometry(pedestalR + 0.25, pedestalR + 0.32, 64);
-    this.geometries.push(haloGeo);
-    const haloMat = new THREE.MeshBasicMaterial({
-      color: this.colors.steelBlue,
+  processLoadedModel(gltf) {
+    const root = gltf.scene;
+
+    // Premium Frosted Glass Material:
+    // Uses physical clearcoat + translucency for bright, luminous architectural frosted glass
+    const frostedGlassMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(0xF0F7FD),
       transparent: true,
-      opacity: 0.55
+      opacity: 0.65,
+      roughness: 0.22,
+      metalness: 0.06,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.12,
+      reflectivity: 0.85,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    });
+    this.materials.push(frostedGlassMat);
+
+    const skylightGlassMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(0xEEF6FD),
+      transparent: true,
+      opacity: 0.70,
+      roughness: 0.12,
+      metalness: 0.05,
+      clearcoat: 1.0,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    });
+    this.materials.push(skylightGlassMat);
+
+    const railingGlassMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(0xEDF5FB),
+      transparent: true,
+      opacity: 0.60,
+      roughness: 0.10,
+      metalness: 0.05,
+      clearcoat: 1.0,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    });
+    this.materials.push(railingGlassMat);
+
+    const coveLightMat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(0xFFFDF8)
+    });
+    this.materials.push(coveLightMat);
+
+    const haloMat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(0x6F9EC8),
+      transparent: true,
+      opacity: 0.80
     });
     this.materials.push(haloMat);
-    const halo = new THREE.Mesh(haloGeo, haloMat);
-    halo.rotation.x = -Math.PI / 2;
-    halo.position.y = 0.006;
-    installGroup.add(halo);
 
-    // 2. Three monolithic frosted-glass blocks with crystal-clear refractive edges
-    const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0xF0F7FD,
-      transmission: 0.90,
-      opacity: 0.98,
-      transparent: true,
-      roughness: 0.16,
-      ior: 1.52,
-      thickness: 1.1,
-      specularIntensity: 1.0,
-      specularColor: 0xFFFFFF
-    });
-    this.materials.push(glassMat);
-
-    // Frosted core material inside each slab for depth
-    const coreMat = new THREE.MeshStandardMaterial({
-      color: 0xDDF0FC,
-      transparent: true,
-      opacity: 0.45,
-      roughness: 0.65
-    });
-    this.materials.push(coreMat);
-
-    const frameMat = new THREE.MeshStandardMaterial({
-      color: this.colors.aluminum,
-      metalness: 0.9,
-      roughness: 0.2
-    });
-    this.materials.push(frameMat);
-
-    // 3 Staggered Panels matching spatial reference
-    const configs = [
-      {
-        id: 'ba',
-        title: 'BUSINESS ANALYSIS',
-        subtitle: 'REQUIREMENTS · AS-IS / TO-BE · WORKFLOWS',
+    // Panel configs for typography decals
+    const panelConfigs = {
+      'ATR_GlassPanel_01': {
+        w: 2.20,
+        h: 1.35,
+        d: 0.14,
         num: '01',
-        w: 2.1,
-        h: 2.0,
-        d: 0.45,
-        pos: new THREE.Vector3(-0.75, pedestalH + 2.0 / 2, 0.65),
-        rotY: 0.08
+        title: 'BUSINESS ANALYSIS',
+        subtitle: 'REQUIREMENTS · AS-IS / TO-BE · WORKFLOWS'
       },
-      {
-        id: 'es',
-        title: 'ENTERPRISE SYSTEMS',
-        subtitle: 'SAP ABAP · ARCHITECTURE · AUDIT TRAIL',
+      'ATR_GlassPanel_02': {
+        w: 1.90,
+        h: 3.00,
+        d: 0.14,
         num: '02',
-        w: 2.4,
-        h: 3.6, // Tallest center-rear
-        d: 0.45,
-        pos: new THREE.Vector3(0.12, pedestalH + 3.6 / 2, -0.42),
-        rotY: -0.06
+        title: 'ENTERPRISE SYSTEMS',
+        subtitle: 'SAP ABAP · ARCHITECTURE · AUDIT TRAIL'
       },
-      {
-        id: 'ts',
-        title: 'TECHNOLOGY SOLUTIONS',
-        subtitle: 'FULL-STACK · CLOUD · INTEGRATION',
+      'ATR_GlassPanel_03': {
+        w: 1.60,
+        h: 2.10,
+        d: 0.14,
         num: '03',
-        w: 1.9,
-        h: 2.6,
-        d: 0.45,
-        pos: new THREE.Vector3(1.05, pedestalH + 2.6 / 2, 0.45),
-        rotY: 0.14
+        title: 'TECHNOLOGY SOLUTIONS',
+        subtitle: 'FULL-STACK · CLOUD · INTEGRATION'
       }
-    ];
+    };
 
-    configs.forEach(cfg => {
-      const pGroup = new THREE.Group();
-      pGroup.position.copy(cfg.pos);
-      pGroup.rotation.y = cfg.rotY;
+    const pendingDecals = [];
 
-      // Outer glass block
-      const blockGeo = new THREE.BoxGeometry(cfg.w, cfg.h, cfg.d);
-      this.geometries.push(blockGeo);
-      const blockMesh = new THREE.Mesh(blockGeo, glassMat);
-      blockMesh.castShadow = true;
-      blockMesh.receiveShadow = true;
-      pGroup.add(blockMesh);
+    root.traverse((child) => {
+      if (!child.isMesh) return;
 
-      // Inner volumetric frosted core
-      const coreGeo = new THREE.BoxGeometry(cfg.w * 0.92, cfg.h * 0.92, cfg.d * 0.85);
-      this.geometries.push(coreGeo);
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      pGroup.add(coreMesh);
+      const name = child.name;
 
-      // Delicate aluminum perimeter frame
-      const borderThickness = 0.03;
-      const tGeo = new THREE.BoxGeometry(cfg.w + borderThickness * 2, borderThickness, cfg.d + 0.01);
-      const sGeo = new THREE.BoxGeometry(borderThickness, cfg.h, cfg.d + 0.01);
-      this.geometries.push(tGeo, sGeo);
+      // 1. Frosted Glass Monoliths
+      if (name === 'ATR_GlassPanel_01' || name === 'ATR_GlassPanel_02' || name === 'ATR_GlassPanel_03') {
+        child.material = frostedGlassMat;
+        child.castShadow = false; // Translucent glass does not cast solid black shadow
+        child.receiveShadow = true;
 
-      const topBar = new THREE.Mesh(tGeo, frameMat);
-      topBar.position.y = cfg.h / 2 + borderThickness / 2;
-      const leftBar = new THREE.Mesh(sGeo, frameMat);
-      leftBar.position.x = -cfg.w / 2 - borderThickness / 2;
-      const rightBar = new THREE.Mesh(sGeo, frameMat);
-      rightBar.position.x = cfg.w / 2 + borderThickness / 2;
-      pGroup.add(topBar, leftBar, rightBar);
-
-      // Pedestal mounting shoes
-      const shoeGeo = new THREE.BoxGeometry(0.3, 0.1, cfg.d + 0.08);
-      this.geometries.push(shoeGeo);
-      const s1 = new THREE.Mesh(shoeGeo, frameMat);
-      s1.position.set(-cfg.w * 0.32, -cfg.h / 2 + 0.05, 0);
-      const s2 = new THREE.Mesh(shoeGeo, frameMat);
-      s2.position.set(cfg.w * 0.32, -cfg.h / 2 + 0.05, 0);
-      pGroup.add(s1, s2);
-
-      // High-res label decal
-      const label = this.buildDecal(cfg);
-      label.position.set(0, 0, cfg.d / 2 + 0.005);
-      pGroup.add(label);
-
-      installGroup.add(pGroup);
+        const cfg = panelConfigs[name];
+        if (cfg) {
+          pendingDecals.push({ mesh: child, cfg });
+        }
+      }
+      // Hide solid blocking frame cubes from graybox (delicate frame is rendered via decal & shoes)
+      else if (name.includes('_Frame')) {
+        child.visible = false;
+      }
+      // 2. Skylight Glass Dome
+      else if (name === 'ATR_SkylightGlass') {
+        child.material = skylightGlassMat;
+      }
+      // 3. Mezzanine Railing Glass
+      else if (name === 'ATR_MezzanineRailingGlass') {
+        child.material = railingGlassMat;
+      }
+      // 4. Floor Halo Accent Ring
+      else if (name === 'ATR_FloorHalo') {
+        child.material = haloMat;
+      }
+      // 5. Architectural Cove Lights
+      else if (name === 'ATR_CeilingCoveLight' || name === 'ATR_CorridorCoveLight') {
+        child.material = coveLightMat;
+      }
+      // 6. Floor & Pedestal
+      else if (name === 'ATR_Floor' || name === 'ATR_CorridorFloor') {
+        child.receiveShadow = true;
+        if (child.material) {
+          child.material.color.setHex(0xF4F5F2);
+          child.material.roughness = 0.40;
+          child.material.metalness = 0.04;
+        }
+      }
+      else if (name === 'ATR_Pedestal') {
+        child.receiveShadow = true;
+        child.castShadow = true;
+        if (child.material) {
+          child.material.color.setHex(0xF7F8F5);
+          child.material.roughness = 0.42;
+          child.material.metalness = 0.04;
+        }
+      }
+      // 7. Brushed Aluminum Trims, Rings, Mullions & Shoes (tuned for web PBR without dark reflection)
+      else if (
+        name.includes('Trim') ||
+        name.includes('Mullion') ||
+        name.includes('Ring') ||
+        name.includes('MountShoe') ||
+        name.includes('Joint') ||
+        name.includes('Handrail') ||
+        name.includes('Portal')
+      ) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        if (child.material) {
+          child.material.color.setHex(0xE2E7EC);
+          child.material.metalness = 0.25;
+          child.material.roughness = 0.35;
+        }
+      }
+      // 8. Architecture (Walls, Pilasters, Soffits, Portals)
+      else {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        if (child.material) {
+          child.material.color.setHex(0xF8F9F7);
+          child.material.roughness = 0.85;
+          child.material.metalness = 0.02;
+        }
+      }
     });
 
-    installGroup.position.set(1.8, 0, 0);
-    this.group.add(installGroup);
+    this.group.add(root);
+    this.group.updateMatrixWorld(true);
+
+    // Build unscaled decals attached to world scene to preserve exact typography aspect ratio
+    pendingDecals.forEach(({ mesh, cfg }) => {
+      const worldPos = new THREE.Vector3();
+      const worldQuat = new THREE.Quaternion();
+      mesh.getWorldPosition(worldPos);
+      mesh.getWorldQuaternion(worldQuat);
+
+      // Front Decal
+      const frontDecal = this.buildDecal(cfg);
+      frontDecal.position.copy(worldPos);
+      frontDecal.quaternion.copy(worldQuat);
+      frontDecal.translateZ(cfg.d / 2 + 0.006);
+      this.group.add(frontDecal);
+
+      // Back Decal (for reverse inspection)
+      const backDecal = this.buildDecal(cfg);
+      backDecal.position.copy(worldPos);
+      backDecal.quaternion.copy(worldQuat);
+      backDecal.translateZ(-(cfg.d / 2 + 0.006));
+      backDecal.rotateY(Math.PI);
+      this.group.add(backDecal);
+    });
   }
 
   buildDecal(cfg) {
@@ -433,135 +324,50 @@ export class EntranceAtriumScene {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Subtle framing
-    ctx.strokeStyle = 'rgba(111, 158, 200, 0.3)';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
+    // Clean subtle frame line
+    ctx.strokeStyle = 'rgba(111, 158, 200, 0.38)';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(36, 36, canvas.width - 72, canvas.height - 72);
 
     // Number tag
-    ctx.fillStyle = '#6F9EC8';
+    ctx.fillStyle = '#4D82AF';
     ctx.font = '600 36px "IBM Plex Mono", monospace';
-    ctx.fillText(`— ${cfg.num} —`, 90, 140);
+    ctx.fillText(`— ${cfg.num} —`, 72, 120);
 
     // Title
-    ctx.fillStyle = '#263640';
-    ctx.font = '700 48px "Manrope", sans-serif';
-    ctx.fillText(cfg.title, 90, 225);
+    ctx.fillStyle = '#202E38';
+    ctx.font = '700 44px "Manrope", sans-serif';
+    ctx.fillText(cfg.title, 72, 195);
 
-    // Divider
-    ctx.strokeStyle = 'rgba(38, 54, 64, 0.25)';
-    ctx.lineWidth = 1.5;
+    // Divider line
+    ctx.strokeStyle = 'rgba(38, 54, 64, 0.28)';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(90, 260);
-    ctx.lineTo(canvas.width - 90, 260);
+    ctx.moveTo(72, 230);
+    ctx.lineTo(canvas.width - 72, 230);
     ctx.stroke();
 
     // Subtitle
-    ctx.fillStyle = '#5A6C78';
-    ctx.font = '500 24px "IBM Plex Mono", monospace';
-    ctx.fillText(cfg.subtitle, 90, 315);
+    ctx.fillStyle = '#4B5E6B';
+    ctx.font = '500 23px "IBM Plex Mono", monospace';
+    ctx.fillText(cfg.subtitle, 72, 280);
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.anisotropy = 8;
     this.textures.push(texture);
 
-    const planeGeo = new THREE.PlaneGeometry(cfg.w * 0.94, cfg.h * 0.94);
+    const planeGeo = new THREE.PlaneGeometry(cfg.w * 0.90, cfg.h * 0.90);
     this.geometries.push(planeGeo);
     const planeMat = new THREE.MeshBasicMaterial({
       map: texture,
       transparent: true,
-      opacity: 0.94,
+      opacity: 0.95,
       depthWrite: false
     });
     this.materials.push(planeMat);
 
     return new THREE.Mesh(planeGeo, planeMat);
-  }
-
-  buildCorridorPortal() {
-    // Portal position at top-right (corresponds to waypoint 04 in spatial plan)
-    const portalGroup = new THREE.Group();
-    // Angle ~40° (X ~ 10, Z ~ -10.5)
-    portalGroup.position.set(10.2, 0, -10.2);
-    portalGroup.rotation.y = -Math.PI / 4;
-
-    const frameMat = new THREE.MeshStandardMaterial({
-      color: this.colors.aluminum,
-      metalness: 0.8,
-      roughness: 0.25
-    });
-    this.materials.push(frameMat);
-
-    const wallMat = new THREE.MeshStandardMaterial({
-      color: this.colors.warmWhite,
-      roughness: 0.85,
-      side: THREE.DoubleSide
-    });
-    this.materials.push(wallMat);
-
-    // Portal archway
-    const pW = 4.0;
-    const pH = 6.2;
-    const pD = 0.4;
-    const lPost = new THREE.Mesh(new THREE.BoxGeometry(0.2, pH, pD), frameMat);
-    lPost.position.set(-pW / 2, pH / 2, 0);
-    const rPost = new THREE.Mesh(new THREE.BoxGeometry(0.2, pH, pD), frameMat);
-    rPost.position.set(pW / 2, pH / 2, 0);
-    const topPost = new THREE.Mesh(new THREE.BoxGeometry(pW + 0.2, 0.2, pD), frameMat);
-    topPost.position.set(0, pH, 0);
-    portalGroup.add(lPost, rPost, topPost);
-
-    // Curved corridor walls extending into distance
-    const len = 12;
-    const lWall = new THREE.Mesh(new THREE.PlaneGeometry(len, pH), wallMat);
-    lWall.position.set(-pW / 2, pH / 2, -len / 2);
-    lWall.rotation.y = Math.PI / 2 + 0.18;
-
-    const rWall = new THREE.Mesh(new THREE.PlaneGeometry(len, pH), wallMat);
-    rWall.position.set(pW / 2, pH / 2, -len / 2);
-    rWall.rotation.y = -Math.PI / 2 + 0.18;
-
-    // Continuous architectural cove light in corridor
-    const stripMat = new THREE.MeshBasicMaterial({ color: 0xFDFBF7 });
-    this.materials.push(stripMat);
-    const strip = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.06, len - 1), stripMat);
-    strip.position.set(0, pH - 0.05, -len / 2);
-
-    portalGroup.add(lWall, rWall, strip);
-    this.group.add(portalGroup);
-  }
-
-  setupNaturalLighting() {
-    // 1. Natural daylight pouring through circular skylight
-    const daylight = new THREE.DirectionalLight(0xFFFFFF, 2.4);
-    daylight.position.set(2.0, 18.0, 3.0);
-    daylight.castShadow = true;
-    daylight.shadow.mapSize.width = 2048;
-    daylight.shadow.mapSize.height = 2048;
-    daylight.shadow.camera.near = 1.0;
-    daylight.shadow.camera.far = 30.0;
-    daylight.shadow.camera.left = -7;
-    daylight.shadow.camera.right = 7;
-    daylight.shadow.camera.top = 7;
-    daylight.shadow.camera.bottom = -7;
-    daylight.shadow.bias = -0.0004;
-    this.group.add(daylight);
-
-    // 2. Soft sky ambient fill
-    const hemiLight = new THREE.HemisphereLight(this.colors.skyLight, 0xF2EFEB, 1.25);
-    hemiLight.position.set(0, 12, 0);
-    this.group.add(hemiLight);
-
-    // 3. Subtle glass edge refraction light
-    const glassLight = new THREE.PointLight(this.colors.iceBlue, 0.9, 12);
-    glassLight.position.set(0.2, 2.5, 1.2);
-    this.group.add(glassLight);
-
-    // 4. Warm ambient fill in corridor
-    const corridorLight = new THREE.PointLight(0xFDF7EE, 0.7, 10);
-    corridorLight.position.set(9.0, 3.0, -9.0);
-    this.group.add(corridorLight);
   }
 
   dispose() {

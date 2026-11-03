@@ -42,14 +42,21 @@ export class World {
 
       // 3. Perspective Camera
       const aspect = window.innerWidth / window.innerHeight;
-      this.camera = new THREE.PerspectiveCamera(46, aspect, 0.1, 80);
+      this.camera = new THREE.PerspectiveCamera(57, aspect, 0.1, 100);
 
       // 4. Camera Controller for K01 - K04 waypoints
       this.cameraController = new CameraController(this.camera);
       this.cameraController.setMobile(window.innerWidth < 768);
 
-      // 5. Build Milestone 01: Entrance Atrium Scene
-      this.entranceAtrium = new EntranceAtriumScene();
+      // 5. Build Milestone 01: Entrance Atrium Scene (loads GLB)
+      this.entranceAtrium = new EntranceAtriumScene(() => {
+        if (this.cameraController) {
+          this.cameraController.update(this.smoothProgress);
+        }
+        if (this.renderer && this.scene && this.camera) {
+          this.renderer.render(this.scene, this.camera);
+        }
+      });
       this.scene.add(this.entranceAtrium.group);
 
       // Initial camera update at progress 0
