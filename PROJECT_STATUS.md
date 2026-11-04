@@ -11,8 +11,8 @@
 | 01 — Initial Entrance Atrium Three.js | Committed | `ed69536`, `index.html`, `app.js`, `src/world.js`, `src/scenes/entrance-atrium.js`, `src/camera-controller.js` | Procedural prototype superseded by Milestone 01B GLB integration |
 | 01A — Blender graybox & GLB export | Committed | `9e50764`, `design-handoff/milestone-01A/` contains `.blend`, `.glb`, generator, K01–K04 PNGs, top-down render and report | Fully verified & exported 70-mesh GLB (1.18 MB) |
 | 01B — Import Blender GLB into website | Committed & Verified | `75e8452`, `entrance-atrium.glb` integrated in `src/scenes/entrance-atrium.js`, `src/camera-controller.js` waypoints K01–K04 aligned, 8 automated Playwright screenshots in `design-handoff/milestone-01B/screenshots/`, report in `verification-report.md` | Ready for Milestone 02 (Profile Gallery) |
-| 02A — Profile Gallery Blender Architecture & GLB | **Committed & Verified** | `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
-| 02B — Profile Gallery Three.js Integration & UI | In Progress | In progress: GLB runtime loading, K05–K08 camera path, HTML/CSS narrative overlay beats | Pending Playwright QA and verification report |
+| 02A — Profile Gallery Blender Architecture & GLB | Committed & Verified | `956746b`, `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
+| 02B — Profile Gallery Three.js Integration & UI | **Committed & Verified** | `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Ready for Milestone 03 (Core Expertise) design handoff |
 
 ## Approved design constraints
 
@@ -49,13 +49,25 @@
 - **Proof Renders:** Headless Blender 5.2.3 LTS renders for K05, K06, K07, K08, top-down overview, and corridor seam check.
 - **Spec Adherence:** 100% background architecture. Zero 3D text/panels inside GLB. Detailed technical report in `design-handoff/milestone-02/asset-report-02A.md`.
 
-## Scene 02 approval — 2026-11-04
+## Milestone 02B Delivery Summary (2026-11-04)
 
-- **Design approval:** Profile Gallery **V2** approved for owner **Hoàng Nguyễn Thành Tâm**.
-- **Design shift:** one light-filled curved corridor; four About messages in screen-fixed HTML overlay, strictly **no information panels or text in 3D objects**.
-- **Continuity:** K05 starts from existing Scene 01 K04; integrate global-scroll-to-chapter-local progress with reversible camera and UI behavior.
-- **Design source:** `design-handoff/milestone-02/SCENE02-V2-APPROVED.md`; visual reference PNGs, comprehensive spec, prompts and QA checklist accompany the handoff ZIP.
-- **Next execution:** 02A Blender architecture and GLB export (Committed & Verified) → 02B Three.js/DOM integration → browser tests, commit, auto push. Follow `AGENTS.md`.
+- **Runtime Asset Integration:** Integrated `profile-gallery.glb` into `src/scenes/profile-gallery.js` within the single persistent Three.js world managed by `src/world.js`.
+- **Material Realization:** Applied `MeshPhysicalMaterial` clear architectural glazing with subtle sky specular highlights, brushed aluminum mullions/trims, polished stone floor/benches, warm plaster walls, and warm cove LED illumination.
+- **Camera Spline Trajectory:** Implemented continuous Catmull-Rom spline path in `src/camera-controller.js` seamlessly continuing from K04 $(4.80, 1.80, -4.80)$ into K05 $\to$ K06 $\to$ K07 $\to$ K08 $(36.95, 1.80, -21.54)$ with zero jump, pop, or teleport.
+- **Editorial DOM Overlay:** Built 4 narrative beats in `index.html` & `styles.css` (Entry, Foundation, Experience, Perspective) in screen-fixed frosted glass card overlay with smooth sequential cross-fading and zero blank gaps. Strictly zero 3D text on meshes.
+- **Navigation & Chapter Schedule:** Centralized global-to-local chapter scheduler in `app.js` with active state indicator switching between `01 Introduction` and `02 About` and two-way jump click navigation.
+- **Verification Evidence:**
+  - Automated tests via Playwright in `design-handoff/milestone-02/test_and_capture_02B.py`.
+  - Desktop 1440x900 screenshots (K01, K04 seam, K05 Beat 1, K06 Beat 2, K07 Beat 3, K08 Beat 4, Reverse Scroll, Nav Click Jump).
+  - Mobile 390x844 responsive screenshots (K01, K05, K07).
+  - 2D Canvas fallback screenshot.
+  - Console hygiene: 0 errors, 0 warnings.
+  - Detailed report: `design-handoff/milestone-02/verification-report.md`.
+
+## Next task — Milestone 03: Core Expertise Scene
+
+1. Prepare design specification and handoff package for Scene 03 (Core Expertise) extending from the exit threshold archway of Profile Gallery.
+2. Review and obtain user approval on Scene 03 visual direction and content copy before commencing 3D grayboxing.
 
 ## GitHub publishing rules
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Project Museum — Hoang Nguyen Thanh Tam: Architectural portfolio featuring Entrance Atrium, software engineering, business analysis, and SAP/ERP systems." />
-  <title>Hoang Nguyen Thanh Tam — Project Museum (Entrance Atrium)</title>
+  <meta name="description" content="Project Museum — Hoang Nguyen Thanh Tam: Architectural portfolio featuring Entrance Atrium and Profile Gallery, software engineering, business analysis, and SAP/ERP systems." />
+  <title>Hoang Nguyen Thanh Tam — Project Museum (Profile Gallery)</title>
 
   <!-- Google Fonts: Manrope, Inter, IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,13 +26,13 @@
 </head>
 <body>
   <!-- Accessibility Skip Link -->
-  <a href="#heroContent" class="skip-link">Skip to hero content</a>
+  <a href="#heroContent" class="skip-link">Skip to main content</a>
 
   <!-- Top Scroll Reading Track -->
   <div class="reading-progress-bar" id="readingBar" aria-hidden="true"></div>
 
   <!-- Persistent Three.js Canvas -->
-  <canvas id="world" role="img" aria-label="3D Glass & Light Museum entrance atrium with circular skylight and three frosted glass panels"></canvas>
+  <canvas id="world" role="img" aria-label="3D Glass & Light Museum with Entrance Atrium and curved Profile Gallery promenade"></canvas>
 
   <!-- Fixed Brand Header -->
   <header class="brand-header">
@@ -43,7 +43,7 @@
     </div>
   </header>
 
-  <!-- Left Hero Interface Overlay -->
+  <!-- Left Hero Interface Overlay (Scene 01: Entrance Atrium) -->
   <aside class="hero-overlay" id="heroContent" aria-label="Introduction Overview">
     <div class="hero-inner">
       <div class="hero-eyebrow">Software Engineering · Business Analysis · SAP / ERP</div>
@@ -67,6 +67,63 @@
     </div>
   </aside>
 
+  <!-- Left About Interface Overlay (Scene 02: Profile Gallery) -->
+  <aside class="about-overlay" id="aboutContent" aria-label="About Hoang Nguyen Thanh Tam" aria-hidden="true">
+    <div class="about-inner">
+      <!-- Beat 1: K05 Entry -->
+      <article class="about-beat is-active" id="beat-k05" data-beat="0">
+        <div class="about-eyebrow">02 / ABOUT ME</div>
+        <h2 class="about-headline">From Software Engineering to <span class="highlight">Enterprise Problem Solving.</span></h2>
+        <p class="about-copy">
+          A journey from building a technical foundation to understanding business processes and developing practical enterprise solutions.
+        </p>
+        <div class="about-badge">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>SCENE 02 / PROFILE GALLERY · GLASS &amp; LIGHT MUSEUM</span>
+        </div>
+      </article>
+
+      <!-- Beat 2: K06 Foundation -->
+      <article class="about-beat" id="beat-k06" data-beat="1">
+        <div class="about-eyebrow">FOUNDATION / SOFTWARE ENGINEERING</div>
+        <h2 class="about-headline">Built on a <span class="highlight">Technical Foundation.</span></h2>
+        <p class="about-copy">
+          I studied Software Engineering at FPT University, with an academic focus on SAP and enterprise systems.
+        </p>
+        <div class="about-badge">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>ACADEMIC FOUNDATION · FPT UNIVERSITY</span>
+        </div>
+      </article>
+
+      <!-- Beat 3: K07 Experience -->
+      <article class="about-beat" id="beat-k07" data-beat="2">
+        <div class="about-eyebrow">EXPERIENCE / REAL-WORLD PRACTICE</div>
+        <h2 class="about-headline">Turning Requirements into <span class="highlight">Solutions.</span></h2>
+        <p class="about-copy">
+          My experience spans software development, business requirements analysis, and customer-facing solution consulting.
+        </p>
+        <div class="about-badge">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>PRACTICAL EXPERIENCE · ANALYSIS &amp; CONSULTING</span>
+        </div>
+      </article>
+
+      <!-- Beat 4: K08 Perspective -->
+      <article class="about-beat" id="beat-k08" data-beat="3">
+        <div class="about-eyebrow">PERSPECTIVE / BUSINESS &amp; TECHNOLOGY</div>
+        <h2 class="about-headline">Connecting <span class="highlight">Business &amp; Technology.</span></h2>
+        <p class="about-copy">
+          I combine technical understanding and business process thinking to help shape practical enterprise solutions.
+        </p>
+        <div class="about-badge">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>PERSPECTIVE · SAP &amp; ENTERPRISE SYSTEMS</span>
+        </div>
+      </article>
+    </div>
+  </aside>
+
   <!-- Fixed Vertical Navigation (Right Zone) -->
   <nav class="vertical-nav" aria-label="Museum Section Navigation">
     <div class="nav-header">
@@ -81,10 +138,9 @@
         </button>
       </li>
       <li>
-        <button type="button" class="nav-item" aria-disabled="true" tabindex="-1">
+        <button type="button" class="nav-item" id="navAbout">
           <span class="nav-num">02</span>
           <span class="nav-label">About</span>
-          <span class="nav-status-tag">UPCOMING</span>
         </button>
       </li>
       <li>
@@ -119,9 +175,9 @@
   </nav>
 
   <!-- Bottom Scroll Hint -->
-  <div class="scroll-hint" aria-hidden="true">
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
     <span class="scroll-hint-indicator"></span>
-    <span>SCROLL TO EXPLORE ATRIUM ↘</span>
+    <span id="scrollHintText">SCROLL TO EXPLORE ATRIUM ↘</span>
   </div>
 
   <!-- Native Scroll Track Container -->
