@@ -40,8 +40,8 @@ export class World {
 
       // 2. Persistent Scene with gentle museum atmosphere fog
       this.scene = new THREE.Scene();
-      this.scene.background = new THREE.Color(0xF7F8F6); // Warm White
-      this.scene.fog = new THREE.Fog(0xF7F8F6, 28, 85);
+      this.scene.background = new THREE.Color(0xF5F8FA); // Daylight Sky White
+      this.scene.fog = new THREE.Fog(0xF5F8FA, 32, 90);
 
       // 3. Perspective Camera
       const aspect = window.innerWidth / window.innerHeight;

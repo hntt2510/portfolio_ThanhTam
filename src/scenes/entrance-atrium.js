@@ -44,11 +44,11 @@ export class EntranceAtriumScene {
 
   setupNaturalLighting() {
     // 1. Ambient baseline light for pristine, non-muddy architectural surfaces
-    const ambientLight = new THREE.AmbientLight(0xFFFDF8, 1.25);
+    const ambientLight = new THREE.AmbientLight(0xFFFDF8, 0.45);
     this.group.add(ambientLight);
 
     // 2. Natural sunlight pouring through circular oculus skylight
-    const daylight = new THREE.DirectionalLight(0xFFFFFF, 2.2);
+    const daylight = new THREE.DirectionalLight(0xFFFFFF, 2.6);
     daylight.position.set(3.0, 18.0, 5.0);
     daylight.castShadow = true;
     daylight.shadow.mapSize.width = 2048;
@@ -64,7 +64,7 @@ export class EntranceAtriumScene {
     this.group.add(daylight);
 
     // 3. Soft sky ambient fill
-    const hemiLight = new THREE.HemisphereLight(this.colors.skyLight, 0xF5F2ED, 1.2);
+    const hemiLight = new THREE.HemisphereLight(this.colors.skyLight, 0xF5F2ED, 0.50);
     hemiLight.position.set(0, 14, 0);
     this.group.add(hemiLight);
 

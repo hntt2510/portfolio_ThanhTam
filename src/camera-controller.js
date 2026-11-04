@@ -27,8 +27,8 @@ export class CameraController {
         new THREE.Vector3(10.50, 1.80, -10.50), // W4: K05 Corridor Advance
         new THREE.Vector3(16.86, 1.80, -16.16), // W5: K05 Gallery Arrival
         new THREE.Vector3(23.61, 1.80, -19.76), // W6: K06 Foundation
-        new THREE.Vector3(30.53, 1.80, -21.82), // W7: K07 Experience
-        new THREE.Vector3(36.95, 1.80, -21.54)  // W8: K08 Perspective / Exit Arch (p = 1.00)
+        new THREE.Vector3(29.68, 1.80, -21.74), // W7: K07 Experience (clear negative space)
+        new THREE.Vector3(36.53, 1.80, -21.62)  // W8: K08 Perspective / Arched Portal (p = 1.00)
       ],
       targets: [
         new THREE.Vector3(1.00, 2.90, -0.20),   // W0 Target
@@ -38,8 +38,8 @@ export class CameraController {
         new THREE.Vector3(17.50, 1.80, -17.50), // W4 Target
         new THREE.Vector3(23.61, 1.80, -19.76), // W5 Target
         new THREE.Vector3(31.00, 1.80, -21.26), // W6 Target
-        new THREE.Vector3(37.67, 1.80, -20.79), // W7 Target
-        new THREE.Vector3(43.03, 1.80, -19.52)  // W8 Target
+        new THREE.Vector3(37.71, 1.80, -20.99), // W7 Target
+        new THREE.Vector3(43.24, 2.20, -19.98)  // W8 Target (Frames Arched Portal)
       ],
       fovs: [57.0, 46.0, 42.0, 48.0, 48.0, 48.0, 46.0, 46.0, 48.0]
     };
@@ -54,8 +54,8 @@ export class CameraController {
         new THREE.Vector3(10.50, 1.85, -10.50),
         new THREE.Vector3(16.86, 1.88, -16.16),
         new THREE.Vector3(23.61, 1.88, -19.76),
-        new THREE.Vector3(30.53, 1.88, -21.82),
-        new THREE.Vector3(36.95, 1.88, -21.54)
+        new THREE.Vector3(29.68, 1.88, -21.74),
+        new THREE.Vector3(36.53, 1.88, -21.62)
       ],
       targets: [
         new THREE.Vector3(1.20, 2.70, 0.00),
@@ -65,8 +65,8 @@ export class CameraController {
         new THREE.Vector3(17.50, 1.80, -17.50),
         new THREE.Vector3(23.61, 1.80, -19.76),
         new THREE.Vector3(31.00, 1.80, -21.26),
-        new THREE.Vector3(37.67, 1.80, -20.79),
-        new THREE.Vector3(43.03, 1.80, -19.52)
+        new THREE.Vector3(37.71, 1.80, -20.99),
+        new THREE.Vector3(43.24, 2.20, -19.98)
       ],
       fovs: [58.0, 48.0, 44.0, 50.0, 50.0, 50.0, 48.0, 48.0, 50.0]
     };
