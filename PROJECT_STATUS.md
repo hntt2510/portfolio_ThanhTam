@@ -13,7 +13,7 @@
 | 01B — Import Blender GLB into website | Committed & Verified | `75e8452`, `entrance-atrium.glb` integrated in `src/scenes/entrance-atrium.js`, `src/camera-controller.js` waypoints K01–K04 aligned, 8 automated Playwright screenshots in `design-handoff/milestone-01B/screenshots/`, report in `verification-report.md` | Ready for Milestone 02 (Profile Gallery) |
 | 02A — Profile Gallery Blender Architecture & GLB | Committed & Verified | `956746b`, `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C |
-| 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | Updated `profile-gallery.blend`, `profile-gallery.glb` (129.7 KB), `generate_profile_gallery.py`, `src/scenes/profile-gallery.js`, `src/camera-controller.js` C1 spline, unboxed editorial UI in `styles.css` & `index.html`, 12 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Milestone 02 fully verified and accepted. Ready for Scene 03 design planning. |
+| 02C — Profile Gallery Visual Polish & C1 Motion | **Implemented; design acceptance pending** | Updated `profile-gallery.blend`, `profile-gallery.glb` (129.7 KB), `generate_profile_gallery.py`, `src/scenes/profile-gallery.js`, `src/camera-controller.js` C1 spline, unboxed editorial UI in `styles.css` & `index.html`, 12 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | 02C technical work committed; independent screenshot review identified visual fidelity issues. See Milestone 02D review. |
 
 ## Approved design constraints
 
@@ -75,6 +75,14 @@
   - Automated Playwright suite captured 12 high-resolution screenshots covering desktop K01–K08, reverse scroll, navigation click, mobile K01/K05/K07, and 2D canvas fallback.
   - Strict console audit: **0 console errors, 0 console warnings, 0 failed network requests**.
   - Detailed report: `design-handoff/milestone-02/verification-report.md`.
+
+## Independent design review & next task — Milestone 02D (2026-11-04)
+
+- `7ff7a5e` is the latest Antigravity implementation commit reviewed. Existing model, unboxed UI, four scroll narrative states, and test artifacts are confirmed.
+- The 02C report's headless browser results are agent-reported, not independently re-run here. Numerical finite-difference C1 error of 0.153% is within the agent's stated tolerance; it is not proof of exact derivative equality.
+- **Design review did NOT yet accept visual fidelity** compared with the approved V2 concept: gallery still appears flat/graybox-like; low-poly green exterior foliage, dominant mullions, washed-out top-left branding and weak K08 threshold framing remain.
+- Next implementation milestone **02D — Visual Fidelity Pass**: `design-handoff/milestone-02/REVIEW-02D-VISUAL-FIDELITY.md`. Preserve scroll, navigation, one persistent WebGL renderer, Scene 01; improve architecture/materials/lighting/camera composition, then capture evidence and auto push.
+- Scene 03 visual planning may start, but **do not implement Scene 03 until the owner explicitly accepts Scene 02 visual outcome**.
 
 ## Next task — Milestone 03: Core Expertise Scene
 
