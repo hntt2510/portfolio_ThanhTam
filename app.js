@@ -3,6 +3,10 @@
  * Project Museum:
  *  - Chapter 01: Entrance Atrium (K01 - K04)
  *  - Chapter 02: Profile Gallery (K05 - K08)
+ *
+ * Full Scroll-Synchronized Copy Scrubbing:
+ * Directly computes algebraic opacity & translateY from chapter-local scroll progress.
+ * 100% Reversible, zero CSS transition lag, screen-reader accessible.
  */
 
 import { World } from './src/world.js';
@@ -30,6 +34,7 @@ class App {
     this.currentChapter = 1;
     this.currentBeatIndex = 0;
     this.world = null;
+    this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     window.__app = this;
     this.init();
@@ -56,6 +61,53 @@ class App {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
+  }
+
+  /**
+   * Evaluates scroll-synchronized opacity and translateY for narrative beat
+   * @param {number} p - local progress in [0, 1]
+   * @param {number} idx - beat index (0, 1, 2, 3)
+   * @returns {{opacity: number, translateY: number}}
+   */
+  computeBeatTransform(p, idx) {
+    const ranges = [
+      { start: 0.00, endIn: 0.00, startOut: 0.20, end: 0.28 },
+      { start: 0.20, endIn: 0.28, startOut: 0.46, end: 0.54 },
+      { start: 0.46, endIn: 0.54, startOut: 0.70, end: 0.78 },
+      { start: 0.70, endIn: 0.78, startOut: 1.00, end: 1.00 }
+    ];
+
+    const r = ranges[idx];
+    let opacity = 0;
+    let translateY = 12;
+
+    if (p < r.start) {
+      opacity = 0;
+      translateY = 12;
+    } else if (p < r.endIn) {
+      // Fading and sliding in from bottom
+      const t = (p - r.start) / Math.max(0.001, (r.endIn - r.start));
+      opacity = t;
+      translateY = 12 * (1.0 - t);
+    } else if (p <= r.startOut) {
+      // Fully settled active state
+      opacity = 1.0;
+      translateY = 0;
+    } else if (p < r.end) {
+      // Fading and sliding out towards top
+      const t = (p - r.startOut) / Math.max(0.001, (r.end - r.startOut));
+      opacity = 1.0 - t;
+      translateY = -12 * t;
+    } else {
+      opacity = 0;
+      translateY = -12;
+    }
+
+    if (this.isReducedMotion) {
+      translateY = 0;
+    }
+
+    return { opacity, translateY };
   }
 
   updateScroll() {
@@ -99,15 +151,18 @@ class App {
         this.scrollHintText.textContent = 'SCROLL TO EXPLORE ATRIUM ↘';
       }
 
-      // Hero overlay cross-fade
+      // Hero overlay scroll-synchronized cross-fade
       if (this.heroContent) {
         if (this.progress <= 0.28) {
           this.heroContent.style.opacity = '1';
+          this.heroContent.style.transform = window.innerWidth <= 768 ? 'none' : 'translateY(-50%)';
           this.heroContent.style.pointerEvents = 'auto';
         } else {
           const fade = Math.max(0, 1.0 - ((this.progress - 0.28) / 0.12));
-          this.heroContent.style.opacity = fade.toFixed(2);
-          this.heroContent.style.pointerEvents = this.progress > 0.35 ? 'none' : 'auto';
+          this.heroContent.style.opacity = fade.toFixed(3);
+          const dy = (this.isReducedMotion || window.innerWidth <= 768) ? 0 : -16 * (1.0 - fade);
+          this.heroContent.style.transform = window.innerWidth <= 768 ? 'none' : `translateY(calc(-50% + ${dy}px))`;
+          this.heroContent.style.pointerEvents = this.progress > 0.36 ? 'none' : 'auto';
         }
       }
 
@@ -149,38 +204,38 @@ class App {
       // Chapter 02 Local Narrative Beats:
       // Local progress in [0, 1]
       const localP = (this.progress - 0.40) / 0.60;
-      let targetBeat = 0;
-
-      if (localP < 0.25) {
-        targetBeat = 0; // K05 Entry
-      } else if (localP < 0.50) {
-        targetBeat = 1; // K06 Foundation
-      } else if (localP < 0.75) {
-        targetBeat = 2; // K07 Experience
-      } else {
-        targetBeat = 3; // K08 Perspective / Exit
-      }
-
-      if (this.currentBeatIndex !== targetBeat) {
-        this.currentBeatIndex = targetBeat;
-      }
+      let primaryBeatIdx = 0;
+      let maxOpacity = -1;
 
       this.beats.forEach((beatEl, idx) => {
         if (!beatEl) return;
-        if (idx === targetBeat) {
+        const { opacity, translateY } = this.computeBeatTransform(localP, idx);
+        
+        beatEl.style.opacity = opacity.toFixed(3);
+        beatEl.style.transform = `translateY(${translateY.toFixed(1)}px)`;
+
+        if (opacity > maxOpacity) {
+          maxOpacity = opacity;
+          primaryBeatIdx = idx;
+        }
+
+        if (opacity > 0.05) {
+          beatEl.style.pointerEvents = opacity > 0.6 ? 'auto' : 'none';
           beatEl.classList.add('is-active');
           beatEl.removeAttribute('aria-hidden');
         } else {
+          beatEl.style.pointerEvents = 'none';
           beatEl.classList.remove('is-active');
           beatEl.setAttribute('aria-hidden', 'true');
         }
       });
+
+      this.currentBeatIndex = primaryBeatIdx;
     }
   }
 
   bindInteractions() {
-    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const scrollBehavior = isReducedMotion ? 'auto' : 'smooth';
+    const scrollBehavior = this.isReducedMotion ? 'auto' : 'smooth';
 
     // Primary CTA: Explore My Work -> scrolls smoothly to K03 Installation Focus
     if (this.exploreBtn) {

@@ -1,14 +1,12 @@
 /**
- * Milestone 02B: Profile Gallery Scene
- * Integrates Blender GLB model (profile-gallery.glb) into Three.js world:
- *  - Native GLB architecture: curved stone promenade floor, continuous plaster inner wall,
- *    curved double-height glass curtain wall with vertical aluminum mullions, cove ceiling,
- *    threshold portal archway to Scene 03, and exterior garden landscape.
- *  - Seamless physical continuity with Scene 01's north-east corridor portal at (15, 0, -15).
- *  - Premium MeshPhysicalMaterial for clear architectural glazing with subtle sky reflections.
- *  - PBR stone floor, white plaster, brushed aluminum, and soft LED cove glow.
- *  - Strictly background architecture: zero 3D text/panels in WebGL. All biographical copy
- *    lives in the HTML/CSS DOM layer.
+ * Milestone 02C: Profile Gallery Scene (Glass & Light Museum)
+ * High-fidelity WebGL realization:
+ *  - Luminous double-height architectural curtain glazing with horizontal transoms and slim silver mullions.
+ *  - Polished warm travertine stone floor with soft daylight highlights.
+ *  - Warm white plaster walls, curved ceiling vault, and glowing LED cove light wash.
+ *  - Sunlit botanical garden terrace outside with manicured hedges, canopy trees, and lawn.
+ *  - Flush arched exit portal to Scene 03 (no hanging obstruction).
+ *  - 100% background architecture: strictly zero 3D text or floating info plaques.
  */
 
 import * as THREE from 'three';
@@ -30,32 +28,33 @@ export class ProfileGalleryScene {
 
   initColors() {
     this.colors = {
-      warmWhite: 0xF7F8F6,
-      ivoryPlaster: 0xF4F5F2,
+      warmWhite: 0xF8F9F6,
+      ivoryPlaster: 0xF7F7F4,
       pureWhite: 0xFFFFFF,
-      lightSilver: 0xE8EBED,
+      lightSilver: 0xE8EFF5,
       iceBlue: 0xD7E8F6,
       steelBlue: 0x6F9EC8,
       graphite: 0x263640,
-      lightStone: 0xF0EFEA,
-      aluminum: 0xD8DFE5,
-      skyLight: 0xDCEBFA,
-      hedgeGreen: 0x6E8569,
-      treeGreen: 0x8FA489,
-      lawnGreen: 0x9CB396
+      lightStone: 0xF2F1EC,
+      aluminum: 0xE4EBF0,
+      skyLight: 0xE2EEFA,
+      hedgeGreen: 0x547A4A,
+      treeGreen: 0x6E9160,
+      lawnGreen: 0x82A374,
+      trunkBrown: 0x584E44
     };
   }
 
   setupGalleryLighting() {
-    // 1. Natural sunlight streaming through curtain wall glazing
-    const gallerySun = new THREE.DirectionalLight(0xFFFDF8, 2.0);
-    gallerySun.position.set(28.0, 16.0, -32.0);
+    // 1. Natural sunlight streaming obliquely through the glazed facade
+    const gallerySun = new THREE.DirectionalLight(0xFFFAF0, 2.4);
+    gallerySun.position.set(28.0, 18.0, -34.0);
     gallerySun.target.position.set(26.0, 0, -22.0);
     gallerySun.castShadow = true;
     gallerySun.shadow.mapSize.width = 2048;
     gallerySun.shadow.mapSize.height = 2048;
     gallerySun.shadow.camera.near = 1.0;
-    gallerySun.shadow.camera.far = 45.0;
+    gallerySun.shadow.camera.far = 48.0;
     gallerySun.shadow.camera.left = -18;
     gallerySun.shadow.camera.right = 18;
     gallerySun.shadow.camera.top = 18;
@@ -66,21 +65,21 @@ export class ProfileGalleryScene {
     this.group.add(gallerySun.target);
 
     // 2. Soft sky daylight hemisphere ambient
-    const galleryHemi = new THREE.HemisphereLight(this.colors.skyLight, 0xF5F2ED, 1.1);
-    galleryHemi.position.set(26.0, 12.0, -22.0);
+    const galleryHemi = new THREE.HemisphereLight(this.colors.skyLight, 0xF5F2EB, 1.25);
+    galleryHemi.position.set(26.0, 14.0, -22.0);
     this.group.add(galleryHemi);
 
-    // 3. Warm cove fill lights placed along the gallery curve for soft architectural wash
-    const coveLight1 = new THREE.PointLight(0xFFF9EE, 0.75, 18);
-    coveLight1.position.set(20.0, 4.5, -18.0);
+    // 3. Warm cove fill lights placed along the gallery curve for soft architectural ceiling wash
+    const coveLight1 = new THREE.PointLight(0xFFF7EC, 0.85, 20);
+    coveLight1.position.set(20.0, 4.6, -18.0);
     this.group.add(coveLight1);
 
-    const coveLight2 = new THREE.PointLight(0xFFF9EE, 0.75, 18);
-    coveLight2.position.set(30.0, 4.5, -22.0);
+    const coveLight2 = new THREE.PointLight(0xFFF7EC, 0.85, 20);
+    coveLight2.position.set(30.0, 4.6, -22.0);
     this.group.add(coveLight2);
 
-    const coveLight3 = new THREE.PointLight(0xFFF9EE, 0.75, 18);
-    coveLight3.position.set(38.0, 4.5, -20.5);
+    const coveLight3 = new THREE.PointLight(0xFFF7EC, 0.85, 20);
+    coveLight3.position.set(38.0, 4.6, -20.5);
     this.group.add(coveLight3);
   }
 
@@ -118,50 +117,52 @@ export class ProfileGalleryScene {
   processLoadedModel(gltf) {
     const root = gltf.scene;
 
-    // Premium Architectural Clear Glazing Material
+    // Premium Architectural Clear Glazing
     const curtainGlassMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0xF0F6FB),
+      color: new THREE.Color(0xF2F7FC),
       transparent: true,
-      opacity: 0.35,
-      roughness: 0.05,
+      opacity: 0.28,
+      roughness: 0.02,
       metalness: 0.05,
+      transmission: 0.96,
+      ior: 1.52,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.08,
-      reflectivity: 0.90,
+      clearcoatRoughness: 0.04,
+      reflectivity: 0.92,
       side: THREE.DoubleSide,
       depthWrite: false
     });
     this.materials.push(curtainGlassMat);
 
-    // Brushed Aluminum for Mullions, Sills, and Threshold Arch
+    // Bright Brushed Silver Aluminum for Mullions & Transoms
     const aluminumMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color(this.colors.aluminum),
-      roughness: 0.28,
+      roughness: 0.18,
       metalness: 0.85
     });
     this.materials.push(aluminumMat);
 
     // Warm Plaster Wall & Ceiling Material
     const plasterMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(this.colors.ivoryPlaster),
+      color: new THREE.Color(this.colors.warmWhite),
       roughness: 0.88,
       metalness: 0.0
     });
     this.materials.push(plasterMat);
 
-    // Polished Light Stone Floor & Benches
+    // Polished Warm Travertine/Stone Floor & Benches
     const stoneFloorMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color(this.colors.lightStone),
-      roughness: 0.35,
+      roughness: 0.26,
       metalness: 0.02
     });
     this.materials.push(stoneFloorMat);
 
     // Glowing Architectural Cove Light Channel
     const coveGlowMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(0xFFFBF2),
-      emissive: new THREE.Color(0xFFFBF2),
-      emissiveIntensity: 2.2,
+      color: new THREE.Color(0xFFF8EE),
+      emissive: new THREE.Color(0xFFF8EE),
+      emissiveIntensity: 3.2,
       toneMapped: false
     });
     this.materials.push(coveGlowMat);
@@ -169,7 +170,7 @@ export class ProfileGalleryScene {
     // Outdoor Garden Landscape Materials
     const hedgeMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color(this.colors.hedgeGreen),
-      roughness: 0.80,
+      roughness: 0.82,
       metalness: 0.0
     });
     this.materials.push(hedgeMat);
@@ -183,10 +184,17 @@ export class ProfileGalleryScene {
 
     const treeMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color(this.colors.treeGreen),
-      roughness: 0.78,
+      roughness: 0.76,
       metalness: 0.0
     });
     this.materials.push(treeMat);
+
+    const trunkMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(this.colors.trunkBrown),
+      roughness: 0.85,
+      metalness: 0.0
+    });
+    this.materials.push(trunkMat);
 
     // Traverse and assign materials with shadow configuration
     root.traverse((node) => {
@@ -202,7 +210,7 @@ export class ProfileGalleryScene {
           node.material = stoneFloorMat;
           node.receiveShadow = true;
           node.castShadow = false;
-        } else if (name.includes('InnerWall') || name.includes('Ceiling')) {
+        } else if (name.includes('InnerWall') || name.includes('Ceiling') || name.includes('Portal')) {
           node.material = plasterMat;
           node.receiveShadow = true;
           node.castShadow = false;
@@ -222,12 +230,16 @@ export class ProfileGalleryScene {
           node.material = lawnMat;
           node.receiveShadow = true;
           node.castShadow = false;
-        } else if (name.includes('Icosphere')) {
+        } else if (name.includes('TreeCanopy') || name.includes('Sphere')) {
           node.material = treeMat;
           node.castShadow = true;
           node.receiveShadow = true;
+        } else if (name.includes('TreeTrunk') || name.includes('Cylinder')) {
+          node.material = trunkMat;
+          node.castShadow = true;
+          node.receiveShadow = true;
         } else {
-          // Framing: Mullions, Sills, Threshold Posts & Header
+          // Mullions, Transoms, Sills, Trims
           node.material = aluminumMat;
           node.castShadow = true;
           node.receiveShadow = true;

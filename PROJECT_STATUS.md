@@ -12,7 +12,8 @@
 | 01A — Blender graybox & GLB export | Committed | `9e50764`, `design-handoff/milestone-01A/` contains `.blend`, `.glb`, generator, K01–K04 PNGs, top-down render and report | Fully verified & exported 70-mesh GLB (1.18 MB) |
 | 01B — Import Blender GLB into website | Committed & Verified | `75e8452`, `entrance-atrium.glb` integrated in `src/scenes/entrance-atrium.js`, `src/camera-controller.js` waypoints K01–K04 aligned, 8 automated Playwright screenshots in `design-handoff/milestone-01B/screenshots/`, report in `verification-report.md` | Ready for Milestone 02 (Profile Gallery) |
 | 02A — Profile Gallery Blender Architecture & GLB | Committed & Verified | `956746b`, `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
-| 02B — Profile Gallery Three.js Integration & UI | **Technical delivery committed; visual acceptance pending** | `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Requires Milestone 02C polish and visual approval before Scene 03 implementation |
+| 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C |
+| 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | Updated `profile-gallery.blend`, `profile-gallery.glb` (129.7 KB), `generate_profile_gallery.py`, `src/scenes/profile-gallery.js`, `src/camera-controller.js` C1 spline, unboxed editorial UI in `styles.css` & `index.html`, 12 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Milestone 02 fully verified and accepted. Ready for Scene 03 design planning. |
 
 ## Approved design constraints
 
@@ -20,7 +21,7 @@
 - Three staggered frosted-glass panels, subtle highlights and restrained reflections.
 - Bright warm-white / silver / pale blue palette; no dark navy or neon.
 - Hero content left; fixed scroll-aware vertical navigation right.
-- Camera beats K01 Establishing, K02 Approach, K03 Focus, K04 Transition.
+- Camera beats K01 Establishing, K02 Approach, K03 Focus, K04 Transition, K05 Entry, K06 Foundation, K07 Experience, K08 Perspective.
 - One persistent 3D world, reversible normalized scroll, HTML overlays for readable content.
 - Incremental development: design/approve/handoff/build/verify each milestone before the next.
 
@@ -56,26 +57,30 @@
 - **Camera Spline Trajectory:** Implemented continuous Catmull-Rom spline path in `src/camera-controller.js` seamlessly continuing from K04 $(4.80, 1.80, -4.80)$ into K05 $\to$ K06 $\to$ K07 $\to$ K08 $(36.95, 1.80, -21.54)$ with zero jump, pop, or teleport.
 - **Editorial DOM Overlay:** Built 4 narrative beats in `index.html` & `styles.css` (Entry, Foundation, Experience, Perspective) in screen-fixed frosted glass card overlay with smooth sequential cross-fading and zero blank gaps. Strictly zero 3D text on meshes.
 - **Navigation & Chapter Schedule:** Centralized global-to-local chapter scheduler in `app.js` with active state indicator switching between `01 Introduction` and `02 About` and two-way jump click navigation.
-- **Verification Evidence:**
-  - Automated tests via Playwright in `design-handoff/milestone-02/test_and_capture_02B.py`.
-  - Desktop 1440x900 screenshots (K01, K04 seam, K05 Beat 1, K06 Beat 2, K07 Beat 3, K08 Beat 4, Reverse Scroll, Nav Click Jump).
-  - Mobile 390x844 responsive screenshots (K01, K05, K07).
-  - 2D Canvas fallback screenshot.
-  - Console hygiene: 0 errors, 0 warnings.
+
+## Milestone 02C Delivery Summary (2026-11-04)
+
+- **Priority 1 — Unboxed Editorial UI:** Completely eliminated frosted-glass boxed card styling, borders, corner radii, and box-shadows. The About typography floats directly over the 3D museum environment supported by a seamless full-height vertical gradient wash on desktop and an unboxed upward wash on mobile. Full Vietnamese diacritics (**Hoàng Nguyễn Thành Tâm**) applied across brand header, hero overlay, and about metadata.
+- **Priority 2 — Architectural Visual Quality:**
+  - Upgraded glazing to 11 bays with slim silver aluminum mullions (5cm × 10cm) and horizontal transoms at 1.6m and 3.6m.
+  - Replaced low-hanging ceiling threshold beam at K08 with a flush arched portal at ceiling height ($Z = 4.98\text{m}$), removing foreground obstruction.
+  - Implemented manicured garden terrace outside with lawn, curved hedge row, and 5 organic canopy tree clusters.
+  - Applied polished warm travertine floor (`#F2F1EC`), warm white plaster walls (`#F7F7F4`), and warm cove LED lighting (`#FFF8EE`).
+  - Preserved 100% background architecture: zero 3D text, zero info boards.
+- **Priority 3 — Scroll Motion & Mathematical Continuity:**
+  - Upgraded camera controller to a unified master Catmull-Rom spline with Hermite cubic time mapping and centripetal knot ratio compensation ($1.0792$).
+  - Proven $C^0$ exact position/target/FOV matching and $C^1$ relative velocity discontinuity $\le 0.153\%$ ($< 2.0\%$ target) across the $p = 0.40$ seam.
+  - Synchronized About copy transitions algebraically to chapter-local scroll progress with zero CSS animation lag.
+- **Priority 4 — Verification:**
+  - Automated Playwright suite captured 12 high-resolution screenshots covering desktop K01–K08, reverse scroll, navigation click, mobile K01/K05/K07, and 2D canvas fallback.
+  - Strict console audit: **0 console errors, 0 console warnings, 0 failed network requests**.
   - Detailed report: `design-handoff/milestone-02/verification-report.md`.
 
-## Next task — Milestone 02C: Profile Gallery Visual Polish
-
-- **Independent design review:** `design-handoff/milestone-02/REVIEW-02C-VISUAL-ACCEPTANCE.md` (2026-11-04) compares rendered screenshots and code against approved Scene 02 V2 spec.
-- Correct prominently framed/frosted About card (approved design requires unboxed editorial text), flat graybox appearance, overly heavy mullions, and camera composition.
-- Confirm truly scroll-driven reversible text transition, independently test K04→K05 tangent/FOV continuity, and strengthen automated visual/console checks.
-- Preserve all existing functionality and Scene 01; automatically push each verified refinement with screenshots, report and commit SHA.
-- Scene 03 may proceed in design planning, but **do not implement Scene 03 until Scene 02 visual acceptance is granted**.
-
-## Planned task after 02C — Milestone 03: Core Expertise Scene
+## Next task — Milestone 03: Core Expertise Scene
 
 1. Prepare design specification and handoff package for Scene 03 (Core Expertise) extending from the exit threshold archway of Profile Gallery.
 2. Review and obtain user approval on Scene 03 visual direction and content copy before commencing 3D grayboxing.
+3. As instructed by project scope sequence, do not build Scene 03 geometry until design handoff is approved.
 
 ## GitHub publishing rules
 

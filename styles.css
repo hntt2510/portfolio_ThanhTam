@@ -137,6 +137,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 10px rgba(255, 255, 255, 0.9);
 }
 
 .brand-title {
@@ -299,26 +300,27 @@ body {
 }
 
 /* ==========================================================================
-   About Narrative Interface Overlay (Left Zone — Scene 02: Profile Gallery)
+   About Narrative Interface Overlay (Unboxed Editorial UI — Scene 02)
    ========================================================================== */
 .about-overlay {
   position: fixed;
-  top: 50%;
-  left: 3rem;
-  transform: translateY(-50%);
-  width: 480px;
-  max-width: calc(100vw - 7rem);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 540px;
+  max-width: calc(100vw - 8rem);
   z-index: 20;
   pointer-events: none;
   opacity: 0;
-  background: rgba(247, 248, 246, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 2.2rem 2.4rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 24px rgba(38, 54, 64, 0.06);
-  transition: opacity 320ms ease, transform 320ms ease;
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  padding-right: 2rem;
+  background: linear-gradient(90deg, rgba(247, 248, 246, 0.88) 0%, rgba(247, 248, 246, 0.45) 60%, rgba(247, 248, 246, 0.0) 100%);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: opacity 280ms ease;
 }
 
 .about-overlay.is-visible {
@@ -328,7 +330,7 @@ body {
 .about-inner {
   position: relative;
   width: 100%;
-  min-height: 280px;
+  min-height: 290px;
 }
 
 .about-beat {
@@ -340,14 +342,12 @@ body {
   flex-direction: column;
   gap: 1.2rem;
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px);
   pointer-events: none;
-  transition: opacity 360ms var(--ease-out), transform 360ms var(--ease-out);
+  will-change: opacity, transform;
 }
 
 .about-beat.is-active {
-  opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
 }
 
@@ -373,22 +373,25 @@ body {
 
 .about-headline {
   font-family: var(--font-heading);
-  font-size: 2.35rem;
+  font-size: 2.55rem;
   font-weight: 800;
-  line-height: 1.18;
+  line-height: 1.15;
   color: var(--color-graphite);
-  letter-spacing: -0.7px;
+  letter-spacing: -0.8px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95), 0 0 14px rgba(255, 255, 255, 0.85);
 }
 
 .about-headline span.highlight {
   color: var(--color-steel-blue-dark);
+  font-weight: 800;
 }
 
 .about-copy {
   font-family: var(--font-body);
-  font-size: 1.0rem;
+  font-size: 1.02rem;
   line-height: 1.65;
   color: var(--color-graphite-muted);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95), 0 0 10px rgba(255, 255, 255, 0.85);
 }
 
 .about-badge {
@@ -568,12 +571,12 @@ body {
 @media (max-width: 1024px) {
   .hero-overlay,
   .about-overlay {
-    width: 360px;
+    width: 380px;
     left: 2rem;
   }
   .hero-headline,
   .about-headline {
-    font-size: 2.05rem;
+    font-size: 2.15rem;
   }
   .vertical-nav {
     right: 1.5rem;
@@ -602,26 +605,27 @@ body {
     font-size: 0.62rem;
   }
   
+  /* Unboxed natural bottom wash on mobile */
   .hero-overlay,
   .about-overlay {
     top: auto;
-    bottom: 1.25rem;
-    left: 1rem;
-    right: 1rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
     transform: none;
-    width: auto;
+    width: 100%;
     max-width: 100%;
-    background: rgba(247, 248, 246, 0.92);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    padding: 1.1rem;
-    border-radius: 8px;
-    border: 1px solid var(--color-border);
-    box-shadow: 0 4px 20px rgba(38, 54, 64, 0.08);
+    background: linear-gradient(to top, rgba(247, 248, 246, 0.96) 0%, rgba(247, 248, 246, 0.85) 65%, transparent 100%);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 2.8rem 1.5rem 1.8rem 1.5rem;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .about-inner {
-    min-height: 190px;
+    min-height: 200px;
   }
 
   .hero-inner,
@@ -641,8 +645,8 @@ body {
 
   .hero-headline,
   .about-headline {
-    font-size: 1.35rem;
-    line-height: 1.22;
+    font-size: 1.40rem;
+    line-height: 1.20;
   }
 
   .hero-copy,
