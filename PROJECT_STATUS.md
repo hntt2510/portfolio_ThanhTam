@@ -14,7 +14,8 @@
 | 02A — Profile Gallery Blender Architecture & GLB | Committed & Verified | `956746b`, `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
-| 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (`#111827`), 12 Playwright screenshots, report in `verification-report.md` | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
+| 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in erification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
+| 03 — Core Expertise Design & Visual Planning | Committed & Ready for Review | design-handoff/milestone-03/ complete design handoff: 6 specification documents, 3D blend model, 10 high-resolution visual boards & keyframes in isual-references/, verified acceptance matrix | Awaiting portfolio owner visual approval prior to Milestone 03A (Blender GLB asset production) |
 
 ## Approved design constraints
 
@@ -86,11 +87,44 @@
   - Strict console audit: **0 console errors, 0 console warnings, 0 failed network requests**.
   - Detailed report: `design-handoff/milestone-02/verification-report.md`.
 
-## Next task — Milestone 03: Core Expertise Scene
+## Milestone 03 Delivery Summary (2026-11-04) — Core Expertise Design & Visual Planning
 
-1. Await owner visual review of Milestone 02D before proceeding to Scene 03.
-2. Prepare design specification and handoff package for Scene 03 (Core Expertise) extending from the sculpted exit threshold archway of Profile Gallery.
-3. As instructed by project scope sequence, do not build Scene 03 geometry until design handoff is approved.
+- **Design Scope Boundary (Design Only):** Full creative direction, visual specifications, architectural blueprints, camera trajectory, copywriting, and 3D asset implementation plan completed without modifying runtime website code.
+- **Architectural Concept: The Expertise Rotunda:**
+  - A bright, expansive circular hall ($R = 12.0\text{m}$, diameter $24.0\text{m}$, perimeter height $6.8\text{m}$, dome peak $8.2\text{m}$) connected directly to the Scene 02 K08 arched portal at $(43.24, 0.00, -19.98)$ without spatial or orientation discontinuity.
+  - Three distinct architectural zones articulated along the perimeter:
+    - **Zone A:** Business Analysis Alcove (recessed curved wall niche, soft diffused cove wash).
+    - **Zone B:** SAP & Enterprise Systems Colonnade (18 vertical brushed-aluminum fins $4\text{cm} \times 12\text{cm}$ with high clerestory glass apertures).
+    - **Zone C:** Solution Consulting & Exit Threshold (grand sculpted arched portal $W = 4.0\text{m}$, $H = 5.0\text{m}$ leading into future Scene 04 Project Exhibition).
+  - Soaring central oculus skylight ($R = 4.0\text{m}$) admitting pure natural zenith daylight onto polished travertine floor paving with radial brushed-aluminum inlay joints.
+- **Camera Spline Trajectory (K08 → K12):**
+  - Fully reconciled desktop ($46^\circ$–$48^\circ$ FOV) and mobile ($48^\circ$–$50^\circ$ FOV) camera ledger.
+  - Verified $C_0$ positional continuity and $C_1$ tangent velocity continuity across the K08 transition seam ($\Delta \theta = 5.2^\circ$).
+  - Narrative beats: K09 Entrance ($p = 0.00 \to 0.22$), K10 Business Analysis ($p = 0.22 \to 0.48$), K11 SAP/Enterprise ($p = 0.48 \to 0.74$), K12 Solution Consulting ($p = 0.74 \to 1.00$).
+- **Editorial DOM Overlay & Anti-Patterns:**
+  - 100% of narrative copy, competencies, and metadata remain in the unboxed HTML/CSS DOM overlay.
+  - Strictly **zero 3D text panels, zero glass cards on meshes, and zero floating skill labels**.
+  - Grounded, authentic copywriting tailored specifically for **Hoàng Nguyễn Thành Tâm**.
+  - Fixed vertical navigation dynamically highlights `03 Expertise`.
+- **Visual Reference Package Deliverables (`design-handoff/milestone-03/visual-references/`):**
+  - `scene03-visual-board-master.png`: Comprehensive master creative director board ($1920 \times 1080$).
+  - `01-scene03-hero-visual.png`: Wide establishing perspective of the Expertise Rotunda.
+  - `02-architecture-and-spatial-layout.png`: Orthographic architectural blueprint with coordinates, dimensions, and camera trajectory.
+  - `03-ui-composition-board.png`: Unboxed editorial typography overlay validation.
+  - `04-camera-storyboard-k09-k12.png`: 4-keyframe scrollytelling storyboard with mathematical camera poses.
+  - `05-material-and-lighting-board.png`: PBR material swatches, daylight strategy, and WCAG AAA contrast matrix.
+  - Individual keyframes `keyframe-K09-visual-reference.png` through `keyframe-K12-visual-reference.png`.
+  - Archival 3D blend file: `expertise-rotunda-design.blend`.
+  - Complete documentation index & licensing: `REFERENCE-INDEX.md`.
+
+## Next task — Milestone 03A: Core Expertise Blender Architecture
+
+1. Await portfolio owner review and visual approval of Milestone 03 design handoff package.
+2. Upon approval, proceed to Milestone 03A:
+   - Procedural Blender generation script `generate_expertise_rotunda.py`.
+   - Export production `expertise-rotunda.glb` ($\le 1.50\text{ MB}$, target $\approx 9,400$ triangles).
+   - Headless proof renders from Blender.
+3. Automatically commit and push per `AGENTS.md`.
 
 ## GitHub publishing rules
 
