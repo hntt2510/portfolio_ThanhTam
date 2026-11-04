@@ -15,7 +15,7 @@
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
 | 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in erification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
-| 03 — Core Expertise Design & Visual Planning | **V1 rejected; V2 redesign complete & ready for review** | design-handoff/milestone-03/ complete V2 redesign package: 6 V2 specs, 3 concept candidate renders, side-by-side Scene 02 audit, 8 visual reference boards in isual-references/, 3D blend model, verified V2 acceptance matrix | Awaiting portfolio owner visual approval of V2 design before any 03A/03B implementation |
+| 03 — Core Expertise Design & Visual Planning | **V2 concept submitted; owner visual approval pending; K08 FOV discrepancy noted** | design-handoff/milestone-03/ complete V2 redesign package: 6 V2 specs, 3 concept candidate renders, side-by-side Scene 02 audit, 8 visual reference boards in isual-references/, 3D blend model, verified V2 acceptance matrix | Awaiting portfolio owner visual approval of V2 design before any 03A/03B implementation |
 
 ## Approved design constraints
 
@@ -143,3 +143,11 @@ After each successfully verified completed unit of work, the implementation agen
 - See `design-handoff/milestone-03/REVIEW-V1-NOT-APPROVED.md` for the redesign brief. Require multiple distinct architectural concepts, keyframe images, and side-by-side comparison against current Scene 02 screenshot.
 - New target: distinct spatial storytelling per competency, while skill information remains direct, readable HTML UI synchronized with reversible scroll. Preserve continuous K08 entry and fixed side navigation.
 - **Do not code Milestone 03A/03B** until V2 design with images has been explicitly approved. Continue automatic commit/push of design artifacts as usual.
+
+## Independent Milestone 03 V2 review — 2026-11-04
+
+- Concept Candidate A / Expertise in Motion is a meaningful architectural and camera-composition departure from Scene 01/02 **on paper**; actual V2 PNG pixels could not be independently decoded by GitHub connector in this review.
+- The existing `src/camera-controller.js` K08 FOV is **48° desktop / 50° mobile**, while V2 ledger lists **46° desktop / 48° mobile**. Must reconcile before 03A/03B; do not change accepted K08 framing to force a match.
+- A small outgoing chord angle does not prove C1 velocity continuity. Test actual position/look/FOV derivatives and preserve K01–K08 chapter-specific shots with the new spline.
+- See `design-handoff/milestone-03/REVIEW-V2-INDEPENDENT.md` for full review and next-step checks.
+- **Status remains pending owner visual approval.** Do not code Scene 03 until approved. Once approved, incremental Blender 03A then Three.js 03B, auto push verified work per `AGENTS.md`.
