@@ -12,7 +12,7 @@
 | 01A — Blender graybox & GLB export | Committed | `9e50764`, `design-handoff/milestone-01A/` contains `.blend`, `.glb`, generator, K01–K04 PNGs, top-down render and report | Fully verified & exported 70-mesh GLB (1.18 MB) |
 | 01B — Import Blender GLB into website | Committed & Verified | `75e8452`, `entrance-atrium.glb` integrated in `src/scenes/entrance-atrium.js`, `src/camera-controller.js` waypoints K01–K04 aligned, 8 automated Playwright screenshots in `design-handoff/milestone-01B/screenshots/`, report in `verification-report.md` | Ready for Milestone 02 (Profile Gallery) |
 | 02A — Profile Gallery Blender Architecture & GLB | Committed & Verified | `956746b`, `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
-| 02B — Profile Gallery Three.js Integration & UI | **Committed & Verified** | `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Ready for Milestone 03 (Core Expertise) design handoff |
+| 02B — Profile Gallery Three.js Integration & UI | **Technical delivery committed; visual acceptance pending** | `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Requires Milestone 02C polish and visual approval before Scene 03 implementation |
 
 ## Approved design constraints
 
@@ -64,7 +64,15 @@
   - Console hygiene: 0 errors, 0 warnings.
   - Detailed report: `design-handoff/milestone-02/verification-report.md`.
 
-## Next task — Milestone 03: Core Expertise Scene
+## Next task — Milestone 02C: Profile Gallery Visual Polish
+
+- **Independent design review:** `design-handoff/milestone-02/REVIEW-02C-VISUAL-ACCEPTANCE.md` (2026-11-04) compares rendered screenshots and code against approved Scene 02 V2 spec.
+- Correct prominently framed/frosted About card (approved design requires unboxed editorial text), flat graybox appearance, overly heavy mullions, and camera composition.
+- Confirm truly scroll-driven reversible text transition, independently test K04→K05 tangent/FOV continuity, and strengthen automated visual/console checks.
+- Preserve all existing functionality and Scene 01; automatically push each verified refinement with screenshots, report and commit SHA.
+- Scene 03 may proceed in design planning, but **do not implement Scene 03 until Scene 02 visual acceptance is granted**.
+
+## Planned task after 02C — Milestone 03: Core Expertise Scene
 
 1. Prepare design specification and handoff package for Scene 03 (Core Expertise) extending from the exit threshold archway of Profile Gallery.
 2. Review and obtain user approval on Scene 03 visual direction and content copy before commencing 3D grayboxing.
