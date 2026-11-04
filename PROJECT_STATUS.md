@@ -1,6 +1,6 @@
 # Project Museum — Progress Tracker
 
-**Updated:** 2026-11-03 (Asia/Ho_Chi_Minh)  
+**Updated:** 2026-11-04 (Asia/Ho_Chi_Minh)  
 **Repository:** https://github.com/hntt2510/portfolio_ThanhTam  
 **Integration branch:** `main`  
 
@@ -11,6 +11,7 @@
 | 01 — Initial Entrance Atrium Three.js | Committed | `ed69536`, `index.html`, `app.js`, `src/world.js`, `src/scenes/entrance-atrium.js`, `src/camera-controller.js` | Procedural prototype superseded by Milestone 01B GLB integration |
 | 01A — Blender graybox & GLB export | Committed | `9e50764`, `design-handoff/milestone-01A/` contains `.blend`, `.glb`, generator, K01–K04 PNGs, top-down render and report | Fully verified & exported 70-mesh GLB (1.18 MB) |
 | 01B — Import Blender GLB into website | **Committed & Verified** | `entrance-atrium.glb` integrated in `src/scenes/entrance-atrium.js`, `src/camera-controller.js` waypoints K01–K04 aligned, 8 automated Playwright screenshots in `design-handoff/milestone-01B/screenshots/`, report in `verification-report.md` | Ready for Milestone 02 (Profile Gallery) |
+| 02 — Profile Gallery | **V2 design approved; 02A / 02B pending** | `design-handoff/milestone-02/SCENE02-V2-APPROVED.md`; full visuals/prompt supplied in handoff ZIP | Model curved corridor, extend camera/UI, perform QA, auto push by verified phase |
 
 ## Approved design constraints
 
