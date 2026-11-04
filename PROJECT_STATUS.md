@@ -15,7 +15,7 @@
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
 | 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in verification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
-| 03 — Core Expertise Architecture (03A) | **03A asset produced, awaiting visual owner review / 03B not implemented** | `design-handoff/milestone-03/production/` contains `expertise-in-motion.blend`, `expertise-in-motion.glb` (38.66 KB), `generate_expertise_in_motion.py`, proof renders `camera-K08-seam.png`–`K12-bridge.png`, `top-down-layout.png`, `portal-seam-detail.png`, 4 mobile portrait renders, `asset-report-03A.md`, `03A-PREFLIGHT.md` | Stop for owner visual review before Milestone 03B Three.js runtime integration |
+| 03 — Core Expertise Architecture (03A) | **03A asset committed; independent visual approval pending / 03B not implemented** | `design-handoff/milestone-03/production/` contains `expertise-in-motion.blend`, `expertise-in-motion.glb` (38.66 KB), `generate_expertise_in_motion.py`, proof renders `camera-K08-seam.png`–`K12-bridge.png`, `top-down-layout.png`, `portal-seam-detail.png`, 4 mobile portrait renders, `asset-report-03A.md`, `03A-PREFLIGHT.md` | Stop for owner visual review before Milestone 03B Three.js runtime integration |
 
 ## Approved design constraints
 
@@ -183,3 +183,13 @@ After each successfully verified completed unit of work, the implementation agen
 - **FOV bug corrected in V2 Camera Ledger**: K08 must preserve live **48° desktop / 50° mobile**. Source `src/camera-controller.js` remains unchanged. See `design-handoff/milestone-03/03-CAMERA-LEDGER-V2.md`.
 - **Antigravity execution prompt:** `design-handoff/milestone-03/ANTIGRAVITY-MILESTONE-03A-BLENDER-PRODUCTION.md` contains preflight hard gate, exact reference PNG list, geometry/materials, render proof, GLB re-import and auto-push verification.
 - Existing 02D visual polish still lacks final owner sign-off; do not silently redefine previous scene's look. Art polish remains on shared follow-up backlog.
+
+## Independent Milestone 03A audit — 2026-11-04
+
+- GitHub `634ee3c` has Blender source, exported 39,584-byte GLB, generator, and 11 K08–K12/top-down/mobile render PNG files. K08 FOV remains 48° desktop / 50° mobile.
+- **Technical asset delivery confirmed, final visual approval pending.** Connector could verify file presence and generator logic but could not inspect the actual PNG pixels or re-import binary GLB independently.
+- Source script only makes a 0.20m vestibule overlap; it does **not** overlay/test Scene 02 physical geometry or sample the whole interpolated camera path for collision. These claims require stronger QA before 03B sign-off.
+- 756 polygons / 39KB is highly optimized but may imply simplified surfaces; actual renders must be reviewed against V2 reference. Polygon count alone cannot guarantee scene quality or 60 FPS.
+- Antigravity report mentions `milestone-03a-production-report.md`, but no such committed file was located; `production/asset-report-03A.md` exists.
+- Full findings: `design-handoff/milestone-03/REVIEW-03A-INDEPENDENT.md`.
+- **Next:** Obtain side-by-side actual K09–K12 versus V2 reference composite + combined Scene 02/03 seam check; owner reviews. **Do not start 03B** until explicit owner visual acceptance.
