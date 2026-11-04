@@ -10,8 +10,9 @@
 |---|---|---|---|
 | 01 — Initial Entrance Atrium Three.js | Committed | `ed69536`, `index.html`, `app.js`, `src/world.js`, `src/scenes/entrance-atrium.js`, `src/camera-controller.js` | Procedural prototype superseded by Milestone 01B GLB integration |
 | 01A — Blender graybox & GLB export | Committed | `9e50764`, `design-handoff/milestone-01A/` contains `.blend`, `.glb`, generator, K01–K04 PNGs, top-down render and report | Fully verified & exported 70-mesh GLB (1.18 MB) |
-| 01B — Import Blender GLB into website | **Committed & Verified** | `entrance-atrium.glb` integrated in `src/scenes/entrance-atrium.js`, `src/camera-controller.js` waypoints K01–K04 aligned, 8 automated Playwright screenshots in `design-handoff/milestone-01B/screenshots/`, report in `verification-report.md` | Ready for Milestone 02 (Profile Gallery) |
-| 02 — Profile Gallery | **V2 design approved; 02A / 02B pending** | `design-handoff/milestone-02/SCENE02-V2-APPROVED.md`; full visuals/prompt supplied in handoff ZIP | Model curved corridor, extend camera/UI, perform QA, auto push by verified phase |
+| 01B — Import Blender GLB into website | Committed & Verified | `75e8452`, `entrance-atrium.glb` integrated in `src/scenes/entrance-atrium.js`, `src/camera-controller.js` waypoints K01–K04 aligned, 8 automated Playwright screenshots in `design-handoff/milestone-01B/screenshots/`, report in `verification-report.md` | Ready for Milestone 02 (Profile Gallery) |
+| 02A — Profile Gallery Blender Architecture & GLB | **Committed & Verified** | `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
+| 02B — Profile Gallery Three.js Integration & UI | In Progress | In progress: GLB runtime loading, K05–K08 camera path, HTML/CSS narrative overlay beats | Pending Playwright QA and verification report |
 
 ## Approved design constraints
 
@@ -39,21 +40,23 @@
   - Console hygiene: 0 errors, 0 warnings.
   - Detailed report: `design-handoff/milestone-01B/verification-report.md`.
 
-## Next task — Milestone 02: Profile Gallery (About Scene)
+## Milestone 02A Delivery Summary (2026-11-04)
 
-1. Design & block Profile Gallery extending from the North-East corridor portal (K04).
-2. Create seamless camera path continuing past K04 into the gallery space.
-3. Transition HTML overlay from Hero to biographical and academic background.
-
-## GitHub publishing rules
-
-After each successfully verified completed unit of work, the implementation agent must commit and push to GitHub automatically without a separate approval prompt, subject to safe Git practices and repository protection. Never assert remote success without confirming the remote SHA. See `AGENTS.md`.
+- **Blender Generator Script:** Created `design-handoff/milestone-02/generate_profile_gallery.py` building a curved gallery architecture with 39 modular meshes adhering to the `PRG_` prefix.
+- **Physical Seam Continuity:** Connects cleanly to Scene 01's north-east corridor portal at $(15.0, 15.0, 0.0)$ with zero floor or wall discontinuity.
+- **Curved Layout:** Radius $R = 25.0\text{m}$, gallery width $W = 5.20\text{m}$, sweeping from $\alpha = 135^\circ$ to $\alpha = 65^\circ$.
+- **Asset Verification:** Exported `design-handoff/milestone-02/profile-gallery.glb` (126.66 KB, 3,280 vertices, 1,646 polygons, 7 safe glTF PBR materials, 0 lights, 0 cameras).
+- **Proof Renders:** Headless Blender 5.2.3 LTS renders for K05, K06, K07, K08, top-down overview, and corridor seam check.
+- **Spec Adherence:** 100% background architecture. Zero 3D text/panels inside GLB. Detailed technical report in `design-handoff/milestone-02/asset-report-02A.md`.
 
 ## Scene 02 approval — 2026-11-04
 
 - **Design approval:** Profile Gallery **V2** approved for owner **Hoàng Nguyễn Thành Tâm**.
-- **Current delivery state:** Design handoff prepared; Blender Milestone 02A and web Milestone 02B are **not implemented**.
 - **Design shift:** one light-filled curved corridor; four About messages in screen-fixed HTML overlay, strictly **no information panels or text in 3D objects**.
 - **Continuity:** K05 starts from existing Scene 01 K04; integrate global-scroll-to-chapter-local progress with reversible camera and UI behavior.
-- **Design source:** `design-handoff/milestone-02/SCENE02-V2-APPROVED.md`; visual reference PNGs, comprehensive spec, prompts and QA checklist accompany the handoff ZIP in the conversation, and must be added to this repo by Antigravity before 02A.
-- **Next execution:** 02A Blender architecture and GLB export → verify, commit, auto push; 02B Three.js/DOM integration → browser tests, commit, auto push. Follow `AGENTS.md`.
+- **Design source:** `design-handoff/milestone-02/SCENE02-V2-APPROVED.md`; visual reference PNGs, comprehensive spec, prompts and QA checklist accompany the handoff ZIP.
+- **Next execution:** 02A Blender architecture and GLB export (Committed & Verified) → 02B Three.js/DOM integration → browser tests, commit, auto push. Follow `AGENTS.md`.
+
+## GitHub publishing rules
+
+After each successfully verified completed unit of work, the implementation agent must commit and push to GitHub automatically without a separate approval prompt, subject to safe Git practices and repository protection. Never assert remote success without confirming the remote SHA. See `AGENTS.md`.
