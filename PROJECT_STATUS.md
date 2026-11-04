@@ -14,7 +14,7 @@
 | 02A — Profile Gallery Blender Architecture & GLB | Committed & Verified | `956746b`, `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
-| 02D — Profile Gallery Visual Fidelity Pass | Committed & Verified | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (`#111827`), 12 Playwright screenshots, report in `verification-report.md` | Ready for portfolio owner visual review. Scene 03 design planning may proceed. |
+| 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (`#111827`), 12 Playwright screenshots, report in `verification-report.md` | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
 
 ## Approved design constraints
 
@@ -95,3 +95,11 @@
 ## GitHub publishing rules
 
 After each successfully verified completed unit of work, the implementation agent must commit and push to GitHub automatically without a separate approval prompt, subject to safe Git practices and repository protection. Never assert remote success without confirming the remote SHA. See `AGENTS.md`.
+
+## Independent visual QA — 2026-11-04
+
+- Reviewed commit `e8ba349` screens (desktop K05, K07, K08; mobile K05) against approved Scene 02 corridor reference.
+- **Improved:** unboxed text, name contrast, K08 portal, richer vegetation meshes.
+- **Still open:** low-poly canopy shape, flat overbright architectural materials, mullions overlapping text at K07/K08, limited photoreal museum quality.
+- Technical delivery completed; **not yet signed off for final visual fidelity**. See `design-handoff/milestone-02/REVIEW-02D-INDEPENDENT.md`.
+- Recommendation: plan Scene 03 art direction while tracking an optimized cross-scene quality pass rather than indefinite procedural graybox iteration. Scene 03 implementation requires its own approved design.
