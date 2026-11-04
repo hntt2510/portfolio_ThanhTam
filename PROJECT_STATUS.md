@@ -15,7 +15,7 @@
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
 | 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in erification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
-| 03 — Core Expertise Design & Visual Planning | Committed & Ready for Review | design-handoff/milestone-03/ complete design handoff: 6 specification documents, 3D blend model, 10 high-resolution visual boards & keyframes in isual-references/, verified acceptance matrix | Awaiting portfolio owner visual approval prior to Milestone 03A (Blender GLB asset production) |
+| 03 — Core Expertise Design & Visual Planning | **V1 reviewed and rejected; V2 redesign pending** | design-handoff/milestone-03/ complete design handoff: 6 specification documents, 3D blend model, 10 high-resolution visual boards & keyframes in isual-references/, verified acceptance matrix | Owner feedback: too similar to Scene 01/02; revise architecture, choreography and UI composition before any 03A/03B implementation |
 
 ## Approved design constraints
 
@@ -137,3 +137,10 @@ After each successfully verified completed unit of work, the implementation agen
 - **Still open:** low-poly canopy shape, flat overbright architectural materials, mullions overlapping text at K07/K08, limited photoreal museum quality.
 - Technical delivery completed; **not yet signed off for final visual fidelity**. See `design-handoff/milestone-02/REVIEW-02D-INDEPENDENT.md`.
 - Recommendation: plan Scene 03 art direction while tracking an optimized cross-scene quality pass rather than indefinite procedural graybox iteration. Scene 03 implementation requires its own approved design.
+
+## Scene 03 visual design feedback — 2026-11-04
+
+- **Owner rejected V1 visual direction** because the interface and environmental experience look too similar to Scenes 01/02. The V1 design package at `eefc3a4` is not approved for code.
+- See `design-handoff/milestone-03/REVIEW-V1-NOT-APPROVED.md` for the redesign brief. Require multiple distinct architectural concepts, keyframe images, and side-by-side comparison against current Scene 02 screenshot.
+- New target: distinct spatial storytelling per competency, while skill information remains direct, readable HTML UI synchronized with reversible scroll. Preserve continuous K08 entry and fixed side navigation.
+- **Do not code Milestone 03A/03B** until V2 design with images has been explicitly approved. Continue automatic commit/push of design artifacts as usual.
