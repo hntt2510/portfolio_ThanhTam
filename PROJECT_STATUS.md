@@ -47,3 +47,12 @@
 ## GitHub publishing rules
 
 After each successfully verified completed unit of work, the implementation agent must commit and push to GitHub automatically without a separate approval prompt, subject to safe Git practices and repository protection. Never assert remote success without confirming the remote SHA. See `AGENTS.md`.
+
+## Scene 02 approval — 2026-11-04
+
+- **Design approval:** Profile Gallery **V2** approved for owner **Hoàng Nguyễn Thành Tâm**.
+- **Current delivery state:** Design handoff prepared; Blender Milestone 02A and web Milestone 02B are **not implemented**.
+- **Design shift:** one light-filled curved corridor; four About messages in screen-fixed HTML overlay, strictly **no information panels or text in 3D objects**.
+- **Continuity:** K05 starts from existing Scene 01 K04; integrate global-scroll-to-chapter-local progress with reversible camera and UI behavior.
+- **Design source:** `design-handoff/milestone-02/SCENE02-V2-APPROVED.md`; visual reference PNGs, comprehensive spec, prompts and QA checklist accompany the handoff ZIP in the conversation, and must be added to this repo by Antigravity before 02A.
+- **Next execution:** 02A Blender architecture and GLB export → verify, commit, auto push; 02B Three.js/DOM integration → browser tests, commit, auto push. Follow `AGENTS.md`.
