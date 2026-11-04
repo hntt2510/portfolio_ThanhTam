@@ -15,7 +15,7 @@
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
 | 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in erification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
-| 03 — Core Expertise Design & Visual Planning | **V2 concept submitted; owner visual approval pending; K08 FOV discrepancy noted** | design-handoff/milestone-03/ complete V2 redesign package: 6 V2 specs, 3 concept candidate renders, side-by-side Scene 02 audit, 8 visual reference boards in isual-references/, 3D blend model, verified V2 acceptance matrix | Awaiting portfolio owner visual approval of V2 design before any 03A/03B implementation |
+| 03 — Core Expertise Design & Visual Planning | **Candidate A V2 APPROVED; 03A Blender production authorized; 03B pending** | design-handoff/milestone-03/ complete V2 redesign package: 6 V2 specs, 3 concept candidate renders, side-by-side Scene 02 audit, 8 visual reference boards in isual-references/, 3D blend model, verified V2 acceptance matrix | Owner approved Candidate A for 03A Blender production only; 03B must wait for production render review |
 
 ## Approved design constraints
 
@@ -151,3 +151,12 @@ After each successfully verified completed unit of work, the implementation agen
 - A small outgoing chord angle does not prove C1 velocity continuity. Test actual position/look/FOV derivatives and preserve K01–K08 chapter-specific shots with the new spline.
 - See `design-handoff/milestone-03/REVIEW-V2-INDEPENDENT.md` for full review and next-step checks.
 - **Status remains pending owner visual approval.** Do not code Scene 03 until approved. Once approved, incremental Blender 03A then Three.js 03B, auto push verified work per `AGENTS.md`.
+
+## Candidate A V2 owner approval — 2026-11-04
+
+- Owner **Hoàng Nguyễn Thành Tâm** explicitly approved **Candidate A — Expertise in Motion / Asymmetric Sawtooth Pavilion** for Milestone 03A production.
+- **03A authorized**: create Blender source `.blend`, export validated GLB, actual K08–K12 renders and seam/collision reports. Then auto commit/push following `AGENTS.md`.
+- **03B not yet authorized**: do not modify Three.js runtime, UI, camera controller, navigation, or build Scene 04 before 03A visual review.
+- **FOV bug corrected in V2 Camera Ledger**: K08 must preserve live **48° desktop / 50° mobile**. Source `src/camera-controller.js` remains unchanged. See `design-handoff/milestone-03/03-CAMERA-LEDGER-V2.md`.
+- **Antigravity execution prompt:** `design-handoff/milestone-03/ANTIGRAVITY-MILESTONE-03A-BLENDER-PRODUCTION.md` contains preflight hard gate, exact reference PNG list, geometry/materials, render proof, GLB re-import and auto-push verification.
+- Existing 02D visual polish still lacks final owner sign-off; do not silently redefine previous scene's look. Art polish remains on shared follow-up backlog.
