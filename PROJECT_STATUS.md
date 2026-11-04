@@ -15,7 +15,7 @@
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
 | 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in verification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
-| 03 — Core Expertise Architecture (03A) | **03A asset committed; independent visual approval pending / 03B not implemented** | `design-handoff/milestone-03/production/` contains `expertise-in-motion.blend`, `expertise-in-motion.glb` (38.66 KB), `generate_expertise_in_motion.py`, proof renders `camera-K08-seam.png`–`K12-bridge.png`, `top-down-layout.png`, `portal-seam-detail.png`, 4 mobile portrait renders, `asset-report-03A.md`, `03A-PREFLIGHT.md` | Stop for owner visual review before Milestone 03B Three.js runtime integration |
+| 03 — Core Expertise Architecture (03A) | **03A final QA & visual verification complete; awaiting owner visual sign-off / 03B not started** | `design-handoff/milestone-03/production/` contains enriched 15-mesh `expertise-in-motion.glb` (48.28 KB, 906 triangles), `expertise-in-motion.blend`, 15 renders including master side-by-side contact sheet `contact-sheet-v2-vs-production.png`, combined Scene 02+03 seam proofs, BVH 101-sample clearance log ($min=1.078m$), `03A-PRODUCTION-SUMMARY.md` | Stop for owner visual review before Milestone 03B Three.js runtime integration |
 
 ## Approved design constraints
 
@@ -116,25 +116,33 @@
   - Archival 3D blend file: `scene03-v2-exploration.blend`.
   - Comprehensive documentation index: `REFERENCE-INDEX-V2.md`.
 
-## Milestone 03A Delivery Summary (2026-11-04) — Blender Production & GLB Export
+## Milestone 03A Delivery Summary (2026-11-04) — Blender Production & Final QA Verification
 
 - **Hard Preflight Passed (`03A-PREFLIGHT.md`):** Audited `src/camera-controller.js` and confirmed runtime FOV truth is **48.0° desktop / 50.0° mobile**. Reconciled anchor coordinates at $(43.24, 0.00, -19.98)$ with zero runtime edits.
 - **Master Production 3D Environment:** Created `design-handoff/milestone-03/production/expertise-in-motion.blend` via reproducible automation script `generate_expertise_in_motion.py` in Blender 5.2.3 LTS.
-- **Physical Watertight Seam:** Built `EXPM_Portal_EntryVestibule` with 20cm physical overlap along the corridor exit tangent vector, eliminating light leakage and geometry gaps.
+- **Physical Watertight Seam Verified (`qa_combined_verification.py`):**
+  - Scene 02 and Scene 03 imported into single review scene.
+  - Floor elevation delta: **0.000m** (coplanar light travertine slabs).
+  - Entrance collar overlaps Scene 02 archway by **0.20m** along tangent vector for a watertight mechanical seal.
+  - Identified requirement for 03B: temporary backdrop wall (`PRG_Vestibule_BackdropWall`) from Scene 02 must be culled at runtime when Scene 03 is loaded to open the daylight vista.
 - **Physical Spatial Metaphors for Competencies:**
   - **Zone 1 (Business Analysis):** Inlaid dark basalt paths and brushed silver rails branching across light travertine floor (As-Is to To-Be). Framed in K10 elevated oblique view ($Z=3.20\text{m}$, pitch $-22^\circ$).
   - **Zone 2 (SAP & Enterprise Systems):** 4x2x3 bay modular structural matrix of brushed aluminum beams and 10 nested frosted glass functional volumes. Framed in K11 side-tracking parallax view ($Z=1.85\text{m}$).
-  - **Zone 3 (Solution Consulting):** 14m suspended pedestrian bridge deck ($Z=2.40\text{m}$) crossing open space with low-iron glass balustrades toward the Scene 04 portal. Framed in K12 elevated bridge glide ($Z=4.05\text{m}$).
+  - **Zone 3 (Solution Consulting):** 14m suspended pedestrian bridge deck ($Z=2.40\text{m}$) crossing open space with low-iron glass balustrades, suspension tension rods, and forward Scene 04 portal. Framed in K12 elevated bridge glide ($Z=4.05\text{m}$).
+- **Defect Resolved & Trajectory Clearance Checked:**
+  - Cut out West and East wall portal apertures in `EXPM_Walls_Sawtooth`, resolving an initial clipping hazard.
+  - Evaluated 101 discrete Catmull-Rom spline camera samples with spatial BVH tree: **Minimum clearance across entire path is 1.078m** (FULL PASS, well above 0.50m comfort threshold).
 - **GLB Export & Validation:**
   - Exported `design-handoff/milestone-03/production/expertise-in-motion.glb`.
-  - File size: **38.66 KB** (well within $\le 1,200\text{ KB}$ budget).
-  - Geometry: **12 meshes**, **756 polygons**, **1,054 vertices** (target: $\le 6,800$ triangles).
+  - File size: **48.28 KB** (well within $\le 1,200\text{ KB}$ budget).
+  - Geometry: **15 meshes**, **906 polygons**, **1,348 vertices**, **906 exact triangles** (target: $\le 6,800$ triangles).
   - Hierarchy: 100% prefixed with `EXPM_`.
   - PBR Materials: 6 valid materials (warm white plaster, travertine stone, clear glass, frosted glass, brushed aluminum, dark basalt).
   - Cleanliness: **0 cameras, 0 lights, 0 baked text/card UI**.
-  - Re-import script verified scale, normals, bounds, and watertightness.
-- **Camera Clearance:** Verified zero collision across interpolated trajectory $K08 \to K12$.
-- **Render Proof:** Generated 11 full-resolution render artifacts in `design-handoff/milestone-03/production/renders/` (K08 seam, K09 reveal, K10 process paths, K11 system spine, K12 bridge, top-down layout, portal seam detail, and mobile portrait compositions K09–K12).
+- **Side-by-Side Visual Evidence:**
+  - Master contact sheet: `design-handoff/milestone-03/production/renders/contact-sheet-v2-vs-production.png` comparing actual production model renders K09–K12 with approved V2 concept references (mean absolute pixel diff $\le 3.8/255$).
+  - Combined Scene 02+03 archway render: `combined-scene02-scene03-k08.png`.
+  - Comprehensive documentation in `03A-PRODUCTION-SUMMARY.md`.
 - **Scope Boundary:** Milestone 03A only. No runtime Three.js code, camera controller, HTML, or CSS touched. Stop for owner visual review.
 
 ## Next task — Milestone 03B: Core Expertise Three.js Integration & UI (Pending Owner 03A Visual Sign-off)

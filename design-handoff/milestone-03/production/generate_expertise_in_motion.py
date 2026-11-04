@@ -3,6 +3,7 @@ import bmesh
 import math
 import os
 import sys
+from mathutils import Vector
 
 # Output paths
 prod_dir = r"D:\THANHTAM\CV\Portfolio\design-handoff\milestone-03\production"
@@ -254,19 +255,79 @@ vn2_t = bm_wl.verts.new((c_ne[0], c_ne[1], H_NORTH))
 vn1_t = bm_wl.verts.new((c_nw[0], c_nw[1], H_NORTH))
 bm_wl.faces.new((vn1, vn1_t, vn2_t, vn2))
 
-# West Wall (Connection wall with arched opening for vestibule)
-vw1 = bm_wl.verts.new((c_sw[0], c_sw[1], 0.0))
-vw2 = bm_wl.verts.new((c_nw[0], c_nw[1], 0.0))
-vw2_t = bm_wl.verts.new((c_nw[0], c_nw[1], H_NORTH))
-vw1_t = bm_wl.verts.new((c_sw[0], c_sw[1], H_SOUTH))
-bm_wl.faces.new((vw1, vw1_t, vw2_t, vw2))
+# West Wall with sculpted opening for entrance vestibule (u = 0.0m)
+# Portal opening spans v in [-1.80m, 1.80m], height from 0.0m to 4.50m
+w_p_half = 1.80
+h_p_open = 4.50
 
-# East Wall (Exit wall leading toward Scene 04 portal)
-ve1 = bm_wl.verts.new((c_se[0], c_se[1], 0.0))
-ve2 = bm_wl.verts.new((c_ne[0], c_ne[1], 0.0))
-ve2_t = bm_wl.verts.new((c_ne[0], c_ne[1], H_NORTH))
-ve1_t = bm_wl.verts.new((c_se[0], c_se[1], H_SOUTH))
-bm_wl.faces.new((ve1, ve2, ve2_t, ve1_t))
+p_w_sw = c_sw # (0.0, -9.0)
+p_w_jl = get_pt(0.0, -w_p_half) # (0.0, -1.8)
+p_w_jr = get_pt(0.0, w_p_half)  # (0.0, 1.8)
+p_w_nw = c_nw # (0.0, 9.0)
+
+z_top_jl = H_SOUTH + ((-w_p_half + W_HALL/2.0) / W_HALL) * (H_NORTH - H_SOUTH)
+z_top_jr = H_SOUTH + ((w_p_half + W_HALL/2.0) / W_HALL) * (H_NORTH - H_SOUTH)
+
+# 1. South flank panel (v: -9.0 to -1.8)
+v_w1 = bm_wl.verts.new((p_w_sw[0], p_w_sw[1], 0.0))
+v_w2 = bm_wl.verts.new((p_w_jl[0], p_w_jl[1], 0.0))
+v_w2_t = bm_wl.verts.new((p_w_jl[0], p_w_jl[1], z_top_jl))
+v_w1_t = bm_wl.verts.new((p_w_sw[0], p_w_sw[1], H_SOUTH))
+bm_wl.faces.new((v_w1, v_w1_t, v_w2_t, v_w2))
+
+# 2. North flank panel (v: 1.8 to 9.0)
+v_w3 = bm_wl.verts.new((p_w_jr[0], p_w_jr[1], 0.0))
+v_w4 = bm_wl.verts.new((p_w_nw[0], p_w_nw[1], 0.0))
+v_w4_t = bm_wl.verts.new((p_w_nw[0], p_w_nw[1], H_NORTH))
+v_w3_t = bm_wl.verts.new((p_w_jr[0], p_w_jr[1], z_top_jr))
+bm_wl.faces.new((v_w3, v_w3_t, v_w4_t, v_w4))
+
+# 3. Lintel bulkhead above portal aperture (v: -1.8 to 1.8, Z: 4.5 to roof)
+v_w_head_l = bm_wl.verts.new((p_w_jl[0], p_w_jl[1], h_p_open))
+v_w_head_r = bm_wl.verts.new((p_w_jr[0], p_w_jr[1], h_p_open))
+bm_wl.faces.new((v_w_head_l, v_w2_t, v_w3_t, v_w_head_r))
+# The portal opening v in [-1.80, 1.80], Z in [0.0, 4.50] is completely open.
+
+# East Wall with sculpted opening for Scene 04 forward portal (u = 36.0m)
+# Portal opening spans v in [-2.10m, 2.10m], bridge deck at Z=2.40m, opening up to Z=7.60m
+w_ex_half = 2.10
+z_ex_deck = 2.40
+z_ex_head = 7.60
+H_S_END = H_SOUTH + 1.20
+H_N_END = H_NORTH + 1.20
+
+p_e_se = c_se
+p_e_jl = get_pt(L_HALL, -w_ex_half)
+p_e_jr = get_pt(L_HALL, w_ex_half)
+p_e_ne = c_ne
+
+z_top_ejl = H_S_END + ((-w_ex_half + W_HALL/2.0) / W_HALL) * (H_N_END - H_S_END)
+z_top_ejr = H_S_END + ((w_ex_half + W_HALL/2.0) / W_HALL) * (H_N_END - H_S_END)
+
+# 1. South flank panel (v: -9.0 to -2.1)
+v_e1 = bm_wl.verts.new((p_e_se[0], p_e_se[1], 0.0))
+v_e2 = bm_wl.verts.new((p_e_jl[0], p_e_jl[1], 0.0))
+v_e2_t = bm_wl.verts.new((p_e_jl[0], p_e_jl[1], z_top_ejl))
+v_e1_t = bm_wl.verts.new((p_e_se[0], p_e_se[1], H_S_END))
+bm_wl.faces.new((v_e1, v_e2, v_e2_t, v_e1_t))
+
+# 2. North flank panel (v: 2.1 to 9.0)
+v_e3 = bm_wl.verts.new((p_e_jr[0], p_e_jr[1], 0.0))
+v_e4 = bm_wl.verts.new((p_e_ne[0], p_e_ne[1], 0.0))
+v_e4_t = bm_wl.verts.new((p_e_ne[0], p_e_ne[1], H_N_END))
+v_e3_t = bm_wl.verts.new((p_e_jr[0], p_e_jr[1], z_top_ejr))
+bm_wl.faces.new((v_e3, v_e4, v_e4_t, v_e3_t))
+
+# 3. Spandrel below bridge deck (v: -2.1 to 2.1, Z: 0.0 to 2.40)
+v_e_sp_l = bm_wl.verts.new((p_e_jl[0], p_e_jl[1], z_ex_deck))
+v_e_sp_r = bm_wl.verts.new((p_e_jr[0], p_e_jr[1], z_ex_deck))
+bm_wl.faces.new((v_e2, v_e3, v_e_sp_r, v_e_sp_l))
+
+# 4. Lintel bulkhead above exit portal (v: -2.1 to 2.1, Z: 7.60 to roof)
+v_e_head_l = bm_wl.verts.new((p_e_jl[0], p_e_jl[1], z_ex_head))
+v_e_head_r = bm_wl.verts.new((p_e_jr[0], p_e_jr[1], z_ex_head))
+bm_wl.faces.new((v_e_head_l, v_e_head_r, v_e3_t, v_e2_t))
+# The forward exit portal v in [-2.10, 2.10], Z in [2.40, 7.60] is completely open.
 
 # Four Sawtooth Sloped Roof Baffles with North Clerestories
 N_SAW = 4
@@ -335,6 +396,42 @@ mesh_cl_glass.update()
 obj_cl_glass = bpy.data.objects.new("EXPM_Clerestory_Glass", mesh_cl_glass)
 obj_cl_glass.data.materials.append(mat_glass)
 link_prod(obj_cl_glass)
+
+# ------------------------------------------------------------------------------
+# 4B. North-Facing Clerestory Mullion Frames (EXPM_Clerestory_Mullions)
+# Slim brushed aluminum architectural mullions dividing each bay into 6 lights
+# ------------------------------------------------------------------------------
+mesh_cl_mul = bpy.data.meshes.new("EXPM_Clerestory_Mullions")
+bm_cm = bmesh.new()
+w_mul = 0.05
+
+for q in clerestory_quads:
+    p_s_top = Vector(q[0])
+    p_n_top = Vector(q[1])
+    p_n_bot = Vector(q[2])
+    p_s_bot = Vector(q[3])
+    
+    # 5 intermediate vertical mullions per clerestory monitor
+    for im in range(1, 6):
+        t = im / 6.0
+        top_pt = p_s_top.lerp(p_n_top, t)
+        bot_pt = p_s_bot.lerp(p_n_bot, t)
+        m1 = top_pt - Vector((w_mul/2.0 * cos_t, w_mul/2.0 * sin_t, 0.0))
+        m2 = top_pt + Vector((w_mul/2.0 * cos_t, w_mul/2.0 * sin_t, 0.0))
+        m3 = bot_pt + Vector((w_mul/2.0 * cos_t, w_mul/2.0 * sin_t, 0.0))
+        m4 = bot_pt - Vector((w_mul/2.0 * cos_t, w_mul/2.0 * sin_t, 0.0))
+        vm1 = bm_cm.verts.new(m1)
+        vm2 = bm_cm.verts.new(m2)
+        vm3 = bm_cm.verts.new(m3)
+        vm4 = bm_cm.verts.new(m4)
+        bm_cm.faces.new((vm1, vm2, vm3, vm4))
+
+bm_cm.to_mesh(mesh_cl_mul)
+bm_cm.free()
+mesh_cl_mul.update()
+obj_cl_mul = bpy.data.objects.new("EXPM_Clerestory_Mullions", mesh_cl_mul)
+obj_cl_mul.data.materials.append(mat_aluminum)
+link_prod(obj_cl_mul)
 
 # ------------------------------------------------------------------------------
 # 5. Monumental Modular System Spine Installation (EXPM_SystemSpine)
@@ -524,6 +621,71 @@ mesh_rail.update()
 obj_rail = bpy.data.objects.new("EXPM_Bridge_Handrail", mesh_rail)
 obj_rail.data.materials.append(mat_aluminum)
 link_prod(obj_rail)
+
+# ------------------------------------------------------------------------------
+# 6D. Bridge Structural Suspension Tension Rods (EXPM_Bridge_SuspensionRods)
+# Slender satin aluminum vertical tension rods suspending the bridge deck
+# ------------------------------------------------------------------------------
+mesh_rods = bpy.data.meshes.new("EXPM_Bridge_SuspensionRods")
+bm_rd = bmesh.new()
+r_rod = 0.025 # 2.5cm radius
+
+for u_rod in [24.0, 27.0, 30.0, 33.0]:
+    for side in [-1.0, 1.0]:
+        v_rod = side * (W_BR / 2.0 + 0.05)
+        p_base = get_pt(u_rod, v_rod)
+        z_roof = H_SOUTH + ((v_rod + W_HALL/2.0) / W_HALL) * (H_NORTH - H_SOUTH) + 0.80
+        pts_b = []
+        pts_t = []
+        for a_i in range(6):
+            ang = a_i * math.pi / 3.0
+            dx = r_rod * math.cos(ang)
+            dy = r_rod * math.sin(ang)
+            pts_b.append(bm_rd.verts.new((p_base[0] + dx, p_base[1] + dy, Z_BR)))
+            pts_t.append(bm_rd.verts.new((p_base[0] + dx, p_base[1] + dy, z_roof)))
+        for a_i in range(6):
+            next_a = (a_i + 1) % 6
+            bm_rd.faces.new((pts_b[a_i], pts_b[next_a], pts_t[next_a], pts_t[a_i]))
+
+bm_rd.to_mesh(mesh_rods)
+bm_rd.free()
+mesh_rods.update()
+obj_rods = bpy.data.objects.new("EXPM_Bridge_SuspensionRods", mesh_rods)
+obj_rods.data.materials.append(mat_aluminum)
+link_prod(obj_rods)
+
+# ------------------------------------------------------------------------------
+# 6E. Architectural Baseboard Reveal Trims (EXPM_Trim_Baseboards)
+# Recessed 6cm brushed aluminum reveals at the perimeter floor/wall intersection
+# ------------------------------------------------------------------------------
+mesh_base = bpy.data.meshes.new("EXPM_Trim_Baseboards")
+bm_bb = bmesh.new()
+h_bb = 0.06 # 6cm height
+
+# South wall baseboard
+p_s_start = get_pt(0.0, -W_HALL/2.0 + 0.02)
+p_s_end = get_pt(L_HALL, -W_HALL/2.0 + 0.02)
+v_bb1 = bm_bb.verts.new((p_s_start[0], p_s_start[1], 0.0))
+v_bb2 = bm_bb.verts.new((p_s_end[0], p_s_end[1], 0.0))
+v_bb3 = bm_bb.verts.new((p_s_end[0], p_s_end[1], h_bb))
+v_bb4 = bm_bb.verts.new((p_s_start[0], p_s_start[1], h_bb))
+bm_bb.faces.new((v_bb1, v_bb2, v_bb3, v_bb4))
+
+# North wall baseboard
+p_n_start = get_pt(0.0, W_HALL/2.0 - 0.02)
+p_n_end = get_pt(L_HALL, W_HALL/2.0 - 0.02)
+v_bb5 = bm_bb.verts.new((p_n_start[0], p_n_start[1], 0.0))
+v_bb6 = bm_bb.verts.new((p_n_end[0], p_n_end[1], 0.0))
+v_bb7 = bm_bb.verts.new((p_n_end[0], p_n_end[1], h_bb))
+v_bb8 = bm_bb.verts.new((p_n_start[0], p_n_start[1], h_bb))
+bm_bb.faces.new((v_bb5, v_bb8, v_bb7, v_bb6))
+
+bm_bb.to_mesh(mesh_base)
+bm_bb.free()
+mesh_base.update()
+obj_base = bpy.data.objects.new("EXPM_Trim_Baseboards", mesh_base)
+obj_base.data.materials.append(mat_aluminum)
+link_prod(obj_base)
 
 # ------------------------------------------------------------------------------
 # 7. Entrance Vestibule Collar (EXPM_Portal_EntryVestibule)

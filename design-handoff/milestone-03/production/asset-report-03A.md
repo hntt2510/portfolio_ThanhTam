@@ -21,12 +21,12 @@ In accordance with `AGENTS.md`, `PROJECT_STATUS.md`, and `ANTIGRAVITY-MILESTONE-
    - **Zone 2 / K11 (SAP & Enterprise Systems):** 3D modular architectural matrix of brushed aluminum structural beams with 10 nested frosted glass volumes representing integrated ERP modules.
    - **Zone 3 / K12 (Solution Consulting):** Suspended observation bridge ($L = 14\text{m}, W = 3.2\text{m}$, deck $Z = 2.40\text{m}$) crossing above the hall floor toward the Scene 04 portal threshold.
 5. **Runtime GLB Export & Clean Re-Import Validation Passed:**
-   - Exported `expertise-in-motion.glb` is **38.66 KB** (budget limit: $1,200\text{ KB}$ — **96.8% under budget**).
-   - Mesh count: **12 meshes**, all cleanly prefixed with `EXPM_`.
-   - Poly count: **756 polygons** / **1,054 vertices** (well under the 6,800 triangle target).
+   - Exported `expertise-in-motion.glb` is **48.28 KB** (budget limit: $1,200\text{ KB}$ — **96.0% under budget**).
+   - Mesh count: **15 meshes**, all cleanly prefixed with `EXPM_`.
+   - Poly count: **906 polygons** / **1,348 vertices** / **906 exact triangles** (Target: $\le 6,800$ triangles — **86.7% under budget**).
    - **Zero cameras and zero lights** in the exported GLB.
    - Clean re-import script confirmed mesh integrity, correct transforms ($Y\text{-up}$), bounding boxes, and material slots.
-6. **Production Renders Generated:** 11 full-resolution render artifacts generated from the production Blender model, covering desktop frames K08–K12, top-down plan view, portal seam detail, and mobile portrait compositions.
+6. **Production Renders & Verification Evidence:** 15 full-resolution render artifacts generated from the production Blender model, covering desktop frames K08–K12, top-down plan view, portal seam detail, mobile portrait compositions, combined Scene 02+03 seam proofs, and the master side-by-side contact sheet (`contact-sheet-v2-vs-production.png`).
 
 ---
 
@@ -36,9 +36,13 @@ In accordance with `AGENTS.md`, `PROJECT_STATUS.md`, and `ANTIGRAVITY-MILESTONE-
 | File Path | Type | Size | Description |
 |---|---|---|---|
 | `design-handoff/milestone-03/03A-PREFLIGHT.md` | Markdown | 4.2 KB | FOV preflight & coordinate audit |
-| `design-handoff/milestone-03/production/expertise-in-motion.blend` | Blender Source | 109.6 KB | Master production `.blend` file (editable) |
-| `design-handoff/milestone-03/production/generate_expertise_in_motion.py` | Python Script | 30.3 KB | Headless automation build script |
-| `design-handoff/milestone-03/production/expertise-in-motion.glb` | Runtime GLB | **38.66 KB** | Validated Three.js runtime asset |
+| `design-handoff/milestone-03/03A-PRODUCTION-SUMMARY.md` | Markdown | 12.0 KB | Comprehensive QA summary & verification audit |
+| `design-handoff/milestone-03/production/expertise-in-motion.blend` | Blender Source | 118.2 KB | Master production `.blend` file (editable) |
+| `design-handoff/milestone-03/production/generate_expertise_in_motion.py` | Python Script | 34.8 KB | Headless automation build script |
+| `design-handoff/milestone-03/production/expertise-in-motion.glb` | Runtime GLB | **48.28 KB** | Validated Three.js runtime asset |
+| `design-handoff/milestone-03/production/renders/contact-sheet-v2-vs-production.png` | PNG (2400x2380) | 1.92 MB | Master side-by-side contact sheet (Ref vs 03A) |
+| `design-handoff/milestone-03/production/renders/combined-scene02-scene03-k08.png` | PNG (1920x1080) | 1.90 MB | Combined Scene 02+03 archway view (FOV 48.0°) |
+| `design-handoff/milestone-03/production/renders/seam-joint-exterior.png` | PNG (1920x1080) | 1.85 MB | High-angle exterior isometric seam junction |
 | `design-handoff/milestone-03/production/renders/camera-K08-seam.png` | PNG (1920x1080) | 1.91 MB | K08 seam alignment view (FOV 48.0°) |
 | `design-handoff/milestone-03/production/renders/camera-K09-reveal.png` | PNG (1920x1080) | 1.94 MB | K09 spatial reveal into sawtooth hall (FOV 52.0°) |
 | `design-handoff/milestone-03/production/renders/camera-K10-process-paths.png` | PNG (1920x1080) | 1.86 MB | K10 elevated oblique view of BA paths (FOV 46.0°) |
@@ -57,26 +61,29 @@ In accordance with `AGENTS.md`, `PROJECT_STATUS.md`, and `ANTIGRAVITY-MILESTONE-
 
 A clean Blender session was initialized to re-import `expertise-in-motion.glb`. The automated inspection script verified node names, vertex counts, polygon counts, and material assignments:
 
-| Mesh Name in GLB | Vertices | Polygons | Materials Assigned | Architectural Role |
-|---|:---:|:---:|---|---|
-| `EXPM_Portal_EntryVestibule` | 16 | 8 | `MAT_EXPM_WhitePlaster` | Overlaps Scene 02 arched exit by 20cm |
-| `EXPM_Floor_Travertine` | 190 | 324 | `MAT_EXPM_TravertineStone` | Main pavilion light stone floor |
-| `EXPM_Walls_Sawtooth` | 32 | 16 | `MAT_EXPM_WhitePlaster` | Sawtooth perimeter envelope ($H=6.2\text{m} \to 10.5\text{m}$) |
-| `EXPM_Clerestory_Glass` | 16 | 8 | `MAT_EXPM_ClearGlass` | North-facing angled skylights |
-| `EXPM_Floor_BasaltPaths` | 44 | 22 | `MAT_EXPM_BasaltPath` | Business Analysis As-Is / To-Be branching paths |
-| `EXPM_Floor_SilverInlays` | 8 | 4 | `MAT_EXPM_BrushedAluminum` | Inlaid metallic process direction rails |
-| `EXPM_SystemSpine_Frames` | 384 | 192 | `MAT_EXPM_BrushedAluminum` | 4x2x3 bay modular ERP structural matrix |
-| `EXPM_SystemSpine_FrostedCubes` | 312 | 156 | `MAT_EXPM_FrostedGlass` | 10 nested frosted glass functional modules |
-| `EXPM_SuspendedBridge_Deck` | 20 | 10 | `MAT_EXPM_TravertineStone` | Solution Consulting elevated bridge ($Z=2.4\text{m}$) |
-| `EXPM_Bridge_Balustrades` | 8 | 4 | `MAT_EXPM_ClearGlass` | Low-iron structural glass guardrails ($H=1.1\text{m}$) |
-| `EXPM_Bridge_Handrail` | 8 | 4 | `MAT_EXPM_BrushedAluminum` | Minimalist satin aluminum top cap |
-| `EXPM_Portal_ExitThreshold` | 16 | 8 | `MAT_EXPM_WhitePlaster` | Scene 04 forward portal frame ($W=3.2\text{m}, H=4.5\text{m}$) |
-| **TOTALS** | **1,054** | **756** | **6 PBR Materials** | **Budget: $\le 6,800$ tris / $\le 1.20$ MB** |
+| Mesh Name in GLB | Vertices | Polygons | Triangles | Materials Assigned | Architectural Role |
+|---|:---:|:---:|:---:|---|---|
+| `EXPM_Portal_EntryVestibule` | 16 | 8 | 8 | `MAT_EXPM_WhitePlaster` | Overlaps Scene 02 arched exit by 20cm |
+| `EXPM_Floor_Travertine` | 190 | 324 | 324 | `MAT_EXPM_TravertineStone` | Main pavilion light stone floor |
+| `EXPM_Walls_Sawtooth` | 46 | 26 | 26 | `MAT_EXPM_WhitePlaster` | Sawtooth envelope with portal openings cut out |
+| `EXPM_Clerestory_Glass` | 16 | 8 | 8 | `MAT_EXPM_ClearGlass` | North-facing angled skylights |
+| `EXPM_Clerestory_Mullions` | 80 | 40 | 40 | `MAT_EXPM_BrushedAluminum` | Aluminum mullions dividing bays into 6 lights |
+| `EXPM_Floor_BasaltPaths` | 44 | 22 | 22 | `MAT_EXPM_BasaltPath` | Business Analysis As-Is / To-Be branching paths |
+| `EXPM_Floor_SilverInlays` | 8 | 4 | 4 | `MAT_EXPM_BrushedAluminum` | Inlaid metallic process direction rails |
+| `EXPM_SystemSpine_Frames` | 384 | 192 | 192 | `MAT_EXPM_BrushedAluminum` | 4x2x3 bay modular ERP structural matrix |
+| `EXPM_SystemSpine_FrostedCubes` | 312 | 156 | 156 | `MAT_EXPM_FrostedGlass` | 10 nested frosted glass functional modules |
+| `EXPM_SuspendedBridge_Deck` | 20 | 10 | 10 | `MAT_EXPM_TravertineStone` | Solution Consulting elevated bridge ($Z=2.4\text{m}$) |
+| `EXPM_Bridge_Balustrades` | 8 | 4 | 4 | `MAT_EXPM_ClearGlass` | Low-iron structural glass guardrails ($H=1.1\text{m}$) |
+| `EXPM_Bridge_Handrail` | 8 | 4 | 4 | `MAT_EXPM_BrushedAluminum` | Minimalist satin aluminum top cap |
+| `EXPM_Bridge_SuspensionRods` | 192 | 96 | 96 | `MAT_EXPM_BrushedAluminum` | 8 structural tension rods suspending bridge deck |
+| `EXPM_Trim_Baseboards` | 8 | 4 | 4 | `MAT_EXPM_BrushedAluminum` | 6cm perimeter wall reveal baseboards |
+| `EXPM_Portal_ExitThreshold` | 16 | 8 | 8 | `MAT_EXPM_WhitePlaster` | Scene 04 forward portal frame ($W=4.2\text{m}, H=5.2\text{m}$) |
+| **TOTALS** | **1,348** | **906** | **906** | **6 PBR Materials** | **Budget: $\le 6,800$ tris / $\le 1.20$ MB** |
 
 ### GLB Export Compliance Checks
 - [x] Node naming: 100% of meshes use prefix `EXPM_`.
-- [x] Triangle/Polygon Budget: 756 polygons vs 6,800 target (**88.9% below ceiling**).
-- [x] File Size Budget: 38.66 KB vs 1,200 KB target (**96.8% below ceiling**).
+- [x] Triangle/Polygon Budget: 906 triangles vs 6,800 target (**86.7% below ceiling**).
+- [x] File Size Budget: 48.28 KB vs 1,200 KB target (**96.0% below ceiling**).
 - [x] Cameras in GLB: **0** (preview cameras excluded during export).
 - [x] Lights in GLB: **0** (studio preview lights excluded during export).
 - [x] Embedded UI/Text: **0** (zero baked-in 3D text, decals, or card geometry).
@@ -126,11 +133,13 @@ The camera route defined in `03A-PREFLIGHT.md` was evaluated for physical geomet
    - Bridge balustrades are at $Y=3.50\text{m}$ ($0.55\text{m}$ below camera lens).
    - Bridge span width: $3.20\text{m}$. Camera travels dead center ($1.60\text{m}$ from either railing). Clearance: **PASSED**.
 
-### 5.2 Interpolation Transition Safety
-- **Segment K08 $\to$ K09:** Moves through the portal aperture ($W=3.60\text{m}, H=4.50\text{m}$). Clearance $>0.9\text{m}$ on both sides.
-- **Segment K09 $\to$ K10:** Smooth elevation lift from $1.85\text{m} \to 3.20\text{m}$ in completely unencumbered pavilion airspace.
-- **Segment K10 $\to$ K11:** Smooth descent from $3.20\text{m} \to 1.85\text{m}$ approaching the System Spine gallery lane.
-- **Segment K11 $\to$ K12:** Continuous ascent from $1.85\text{m} \to 4.05\text{m}$ stepping onto the elevated bridge approach.
+### 5.2 Discrete BVH Spatial Collision Sampling (101 Trajectory Steps)
+Using Blender's spatial BVH tree algorithm on the combined scene geometry across 101 discrete Catmull-Rom spline samples:
+- **West & East Portal Apertures:** Cut open cleanly with zero wall intersections.
+- **Minimum Clearance Measured:** **$1.078\text{m}$** (well above the $\ge 0.50\text{m}$ threshold).
+- **Location of Minimum Clearance:** Sample 100 ($K12$ bridge deck terminus at $[63.20, 8.20, 4.05]$).
+- **Overall Trajectory Clearance Status:** **FULL PASS (101 / 101 samples strictly clear)**.
+- **Detailed JSON Log:** [`qa_combined_results.json`](file:///d:/THANHTAM/CV/Portfolio/design-handoff/milestone-03/production/qa_combined_results.json).
 
 ---
 

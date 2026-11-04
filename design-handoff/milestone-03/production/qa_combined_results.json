@@ -1,0 +1,1849 @@
+{
+  "milestone": "03A_FINAL_QA",
+  "timestamp": "2026-11-04",
+  "mesh_statistics": {
+    "scene03_total_meshes": 15,
+    "scene03_total_vertices": 1348,
+    "scene03_total_polygons": 906,
+    "scene03_exact_triangles": 906,
+    "triangle_budget_ceiling": 6800,
+    "triangle_budget_percentage": 13.32,
+    "meshes": [
+      {
+        "name": "EXPM_Bridge_Balustrades",
+        "vertices": 8,
+        "polygons": 4,
+        "triangles": 4,
+        "materials": [
+          "MAT_EXPM_ClearGlass"
+        ]
+      },
+      {
+        "name": "EXPM_Bridge_Handrail",
+        "vertices": 8,
+        "polygons": 4,
+        "triangles": 4,
+        "materials": [
+          "MAT_EXPM_BrushedAluminum"
+        ]
+      },
+      {
+        "name": "EXPM_Bridge_SuspensionRods",
+        "vertices": 192,
+        "polygons": 96,
+        "triangles": 96,
+        "materials": [
+          "MAT_EXPM_BrushedAluminum"
+        ]
+      },
+      {
+        "name": "EXPM_Clerestory_Glass",
+        "vertices": 16,
+        "polygons": 8,
+        "triangles": 8,
+        "materials": [
+          "MAT_EXPM_ClearGlass"
+        ]
+      },
+      {
+        "name": "EXPM_Clerestory_Mullions",
+        "vertices": 80,
+        "polygons": 40,
+        "triangles": 40,
+        "materials": [
+          "MAT_EXPM_BrushedAluminum"
+        ]
+      },
+      {
+        "name": "EXPM_Floor_BasaltPaths",
+        "vertices": 44,
+        "polygons": 22,
+        "triangles": 22,
+        "materials": [
+          "MAT_EXPM_BasaltPath"
+        ]
+      },
+      {
+        "name": "EXPM_Floor_SilverInlays",
+        "vertices": 8,
+        "polygons": 4,
+        "triangles": 4,
+        "materials": [
+          "MAT_EXPM_BrushedAluminum"
+        ]
+      },
+      {
+        "name": "EXPM_Floor_Travertine",
+        "vertices": 190,
+        "polygons": 324,
+        "triangles": 324,
+        "materials": [
+          "MAT_EXPM_TravertineStone"
+        ]
+      },
+      {
+        "name": "EXPM_Portal_EntryVestibule",
+        "vertices": 16,
+        "polygons": 8,
+        "triangles": 8,
+        "materials": [
+          "MAT_EXPM_WhitePlaster"
+        ]
+      },
+      {
+        "name": "EXPM_Portal_ExitThreshold",
+        "vertices": 16,
+        "polygons": 8,
+        "triangles": 8,
+        "materials": [
+          "MAT_EXPM_WhitePlaster"
+        ]
+      },
+      {
+        "name": "EXPM_SuspendedBridge_Deck",
+        "vertices": 20,
+        "polygons": 10,
+        "triangles": 10,
+        "materials": [
+          "MAT_EXPM_TravertineStone"
+        ]
+      },
+      {
+        "name": "EXPM_SystemSpine_Frames",
+        "vertices": 384,
+        "polygons": 192,
+        "triangles": 192,
+        "materials": [
+          "MAT_EXPM_BrushedAluminum"
+        ]
+      },
+      {
+        "name": "EXPM_SystemSpine_FrostedCubes",
+        "vertices": 312,
+        "polygons": 156,
+        "triangles": 156,
+        "materials": [
+          "MAT_EXPM_FrostedGlass"
+        ]
+      },
+      {
+        "name": "EXPM_Trim_Baseboards",
+        "vertices": 8,
+        "polygons": 4,
+        "triangles": 4,
+        "materials": [
+          "MAT_EXPM_BrushedAluminum"
+        ]
+      },
+      {
+        "name": "EXPM_Walls_Sawtooth",
+        "vertices": 46,
+        "polygons": 26,
+        "triangles": 26,
+        "materials": [
+          "MAT_EXPM_WhitePlaster"
+        ]
+      }
+    ]
+  },
+  "seam_verification": {
+    "floor_02_z": 0.009999999776482582,
+    "floor_03_z": 0.0,
+    "floor_elevation_diff_m": 0.009999999776482582,
+    "floor_continuity_status": "PASSED (< 0.01m)",
+    "scene02_arch_bounds": {
+      "x": [
+        41.940425872802734,
+        44.54587936401367
+      ],
+      "y": [
+        17.52851104736328,
+        22.431489944458008
+      ],
+      "z": [
+        0.0,
+        5.199999809265137
+      ]
+    },
+    "scene03_collar_bounds": {
+      "x": [
+        42.29802703857422,
+        45.36017608642578
+      ],
+      "y": [
+        17.714717864990234,
+        21.695877075195312
+      ],
+      "z": [
+        0.0,
+        4.5
+      ]
+    },
+    "overlap_dimensions": {
+      "x": 2.247852325439453,
+      "y": 3.981159210205078,
+      "z": 4.5
+    },
+    "seam_overlap_status": "WATERTIGHT_OVERLAP",
+    "vestibule_backdrop_wall": {
+      "name": "PRG_Vestibule_BackdropWall",
+      "location": [
+        47.049644470214844,
+        18.20500373840332,
+        2.5999999046325684
+      ],
+      "x_span": [
+        45.66544723510742,
+        48.433841705322266
+      ],
+      "y_span": [
+        15.502752304077148,
+        20.907255172729492
+      ],
+      "z_span": [
+        0.0,
+        5.199999809265137
+      ],
+      "action_required": "MUST_BE_CULLED_AT_RUNTIME_WHEN_SCENE03_LOADED (Blocks K09-K10 corridor)"
+    }
+  },
+  "trajectory_clearance": {
+    "total_samples": 101,
+    "minimum_clearance_distance_m": 1.078,
+    "minimum_clearance_sample": {
+      "index": 100,
+      "segment": "K12_endpoint",
+      "u": 1.0,
+      "position": [
+        63.20000076293945,
+        8.199999809265137,
+        4.050000190734863
+      ],
+      "target": [
+        75.0,
+        2.799999952316284,
+        4.199999809265137
+      ]
+    },
+    "comfort_threshold_m": 0.5,
+    "status": "PASS",
+    "samples": [
+      {
+        "sample_idx": 0,
+        "segment": "K08_to_K09",
+        "position": [
+          36.53,
+          21.62,
+          1.8
+        ],
+        "nearest_mesh_pt": [
+          36.53,
+          21.62,
+          0.0
+        ],
+        "clearance_m": 1.8,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 1,
+        "segment": "K08_to_K09",
+        "position": [
+          36.851,
+          21.533,
+          1.801
+        ],
+        "nearest_mesh_pt": [
+          36.851,
+          21.533,
+          0.0
+        ],
+        "clearance_m": 1.801,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 2,
+        "segment": "K08_to_K09",
+        "position": [
+          37.176,
+          21.451,
+          1.8
+        ],
+        "nearest_mesh_pt": [
+          37.176,
+          21.451,
+          0.0
+        ],
+        "clearance_m": 1.8,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 3,
+        "segment": "K08_to_K09",
+        "position": [
+          37.505,
+          21.372,
+          1.798
+        ],
+        "nearest_mesh_pt": [
+          37.505,
+          21.372,
+          0.0
+        ],
+        "clearance_m": 1.798,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 4,
+        "segment": "K08_to_K09",
+        "position": [
+          37.837,
+          21.297,
+          1.794
+        ],
+        "nearest_mesh_pt": [
+          37.837,
+          21.297,
+          0.0
+        ],
+        "clearance_m": 1.794,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 5,
+        "segment": "K08_to_K09",
+        "position": [
+          38.172,
+          21.224,
+          1.789
+        ],
+        "nearest_mesh_pt": [
+          38.172,
+          21.224,
+          0.0
+        ],
+        "clearance_m": 1.789,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 6,
+        "segment": "K08_to_K09",
+        "position": [
+          38.508,
+          21.152,
+          1.784
+        ],
+        "nearest_mesh_pt": [
+          38.508,
+          21.152,
+          0.0
+        ],
+        "clearance_m": 1.784,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 7,
+        "segment": "K08_to_K09",
+        "position": [
+          38.845,
+          21.083,
+          1.777
+        ],
+        "nearest_mesh_pt": [
+          38.845,
+          21.083,
+          0.0
+        ],
+        "clearance_m": 1.777,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 8,
+        "segment": "K08_to_K09",
+        "position": [
+          39.184,
+          21.013,
+          1.771
+        ],
+        "nearest_mesh_pt": [
+          39.184,
+          21.013,
+          0.0
+        ],
+        "clearance_m": 1.771,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 9,
+        "segment": "K08_to_K09",
+        "position": [
+          39.522,
+          20.944,
+          1.764
+        ],
+        "nearest_mesh_pt": [
+          39.522,
+          20.944,
+          0.0
+        ],
+        "clearance_m": 1.764,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 10,
+        "segment": "K08_to_K09",
+        "position": [
+          39.861,
+          20.875,
+          1.758
+        ],
+        "nearest_mesh_pt": [
+          39.861,
+          20.875,
+          0.0
+        ],
+        "clearance_m": 1.758,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 11,
+        "segment": "K08_to_K09",
+        "position": [
+          40.198,
+          20.805,
+          1.752
+        ],
+        "nearest_mesh_pt": [
+          40.198,
+          20.805,
+          0.0
+        ],
+        "clearance_m": 1.752,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 12,
+        "segment": "K08_to_K09",
+        "position": [
+          40.534,
+          20.733,
+          1.746
+        ],
+        "nearest_mesh_pt": [
+          40.534,
+          20.733,
+          0.0
+        ],
+        "clearance_m": 1.746,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 13,
+        "segment": "K08_to_K09",
+        "position": [
+          40.867,
+          20.659,
+          1.742
+        ],
+        "nearest_mesh_pt": [
+          40.867,
+          20.659,
+          0.0
+        ],
+        "clearance_m": 1.742,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 14,
+        "segment": "K08_to_K09",
+        "position": [
+          41.198,
+          20.582,
+          1.738
+        ],
+        "nearest_mesh_pt": [
+          41.198,
+          20.582,
+          0.0
+        ],
+        "clearance_m": 1.738,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 15,
+        "segment": "K08_to_K09",
+        "position": [
+          41.526,
+          20.503,
+          1.736
+        ],
+        "nearest_mesh_pt": [
+          41.526,
+          20.503,
+          0.0
+        ],
+        "clearance_m": 1.736,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 16,
+        "segment": "K08_to_K09",
+        "position": [
+          41.85,
+          20.419,
+          1.736
+        ],
+        "nearest_mesh_pt": [
+          41.85,
+          20.419,
+          0.0
+        ],
+        "clearance_m": 1.736,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 17,
+        "segment": "K08_to_K09",
+        "position": [
+          42.169,
+          20.331,
+          1.738
+        ],
+        "nearest_mesh_pt": [
+          42.169,
+          20.331,
+          0.0
+        ],
+        "clearance_m": 1.738,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 18,
+        "segment": "K08_to_K09",
+        "position": [
+          42.484,
+          20.238,
+          1.742
+        ],
+        "nearest_mesh_pt": [
+          42.484,
+          20.238,
+          0.0
+        ],
+        "clearance_m": 1.742,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 19,
+        "segment": "K08_to_K09",
+        "position": [
+          42.793,
+          20.139,
+          1.748
+        ],
+        "nearest_mesh_pt": [
+          42.793,
+          20.139,
+          0.0
+        ],
+        "clearance_m": 1.748,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 20,
+        "segment": "K08_to_K09",
+        "position": [
+          43.096,
+          20.035,
+          1.757
+        ],
+        "nearest_mesh_pt": [
+          43.238,
+          19.969,
+          0.01
+        ],
+        "clearance_m": 1.754,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 21,
+        "segment": "K08_to_K09",
+        "position": [
+          43.392,
+          19.923,
+          1.769
+        ],
+        "nearest_mesh_pt": [
+          43.392,
+          19.923,
+          0.01
+        ],
+        "clearance_m": 1.759,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 22,
+        "segment": "K08_to_K09",
+        "position": [
+          43.682,
+          19.805,
+          1.784
+        ],
+        "nearest_mesh_pt": [
+          44.431,
+          21.411,
+          1.784
+        ],
+        "clearance_m": 1.772,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 23,
+        "segment": "K08_to_K09",
+        "position": [
+          43.963,
+          19.678,
+          1.802
+        ],
+        "nearest_mesh_pt": [
+          44.71,
+          21.281,
+          1.802
+        ],
+        "clearance_m": 1.768,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 24,
+        "segment": "K08_to_K09",
+        "position": [
+          44.236,
+          19.544,
+          1.824
+        ],
+        "nearest_mesh_pt": [
+          44.986,
+          21.152,
+          1.824
+        ],
+        "clearance_m": 1.774,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 25,
+        "segment": "K09_to_K010",
+        "position": [
+          44.5,
+          19.4,
+          1.85
+        ],
+        "nearest_mesh_pt": [
+          45.258,
+          21.025,
+          1.85
+        ],
+        "clearance_m": 1.793,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 26,
+        "segment": "K09_to_K010",
+        "position": [
+          44.753,
+          19.245,
+          1.882
+        ],
+        "nearest_mesh_pt": [
+          43.839,
+          17.715,
+          1.882
+        ],
+        "clearance_m": 1.783,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 27,
+        "segment": "K09_to_K010",
+        "position": [
+          44.994,
+          19.078,
+          1.922
+        ],
+        "nearest_mesh_pt": [
+          43.839,
+          17.715,
+          1.922
+        ],
+        "clearance_m": 1.787,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 28,
+        "segment": "K09_to_K010",
+        "position": [
+          45.223,
+          18.901,
+          1.969
+        ],
+        "nearest_mesh_pt": [
+          43.839,
+          17.715,
+          1.969
+        ],
+        "clearance_m": 1.823,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 29,
+        "segment": "K09_to_K010",
+        "position": [
+          45.443,
+          18.713,
+          2.022
+        ],
+        "nearest_mesh_pt": [
+          43.839,
+          17.715,
+          2.022
+        ],
+        "clearance_m": 1.889,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 30,
+        "segment": "K09_to_K010",
+        "position": [
+          45.653,
+          18.516,
+          2.08
+        ],
+        "nearest_mesh_pt": [
+          43.839,
+          17.715,
+          2.08
+        ],
+        "clearance_m": 1.983,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 31,
+        "segment": "K09_to_K010",
+        "position": [
+          45.856,
+          18.31,
+          2.143
+        ],
+        "nearest_mesh_pt": [
+          43.839,
+          17.715,
+          2.143
+        ],
+        "clearance_m": 2.103,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 32,
+        "segment": "K09_to_K010",
+        "position": [
+          46.051,
+          18.098,
+          2.21
+        ],
+        "nearest_mesh_pt": [
+          46.051,
+          18.098,
+          0.01
+        ],
+        "clearance_m": 2.2,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 33,
+        "segment": "K09_to_K010",
+        "position": [
+          46.24,
+          17.88,
+          2.28
+        ],
+        "nearest_mesh_pt": [
+          46.24,
+          17.88,
+          0.01
+        ],
+        "clearance_m": 2.27,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 34,
+        "segment": "K09_to_K010",
+        "position": [
+          46.424,
+          17.656,
+          2.352
+        ],
+        "nearest_mesh_pt": [
+          46.424,
+          17.656,
+          0.01
+        ],
+        "clearance_m": 2.342,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 35,
+        "segment": "K09_to_K010",
+        "position": [
+          46.603,
+          17.429,
+          2.426
+        ],
+        "nearest_mesh_pt": [
+          46.603,
+          17.429,
+          0.01
+        ],
+        "clearance_m": 2.416,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 36,
+        "segment": "K09_to_K010",
+        "position": [
+          46.78,
+          17.198,
+          2.501
+        ],
+        "nearest_mesh_pt": [
+          46.616,
+          17.275,
+          0.01
+        ],
+        "clearance_m": 2.497,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 37,
+        "segment": "K09_to_K010",
+        "position": [
+          46.955,
+          16.966,
+          2.575
+        ],
+        "nearest_mesh_pt": [
+          46.955,
+          16.966,
+          0.0
+        ],
+        "clearance_m": 2.575,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 38,
+        "segment": "K09_to_K010",
+        "position": [
+          47.129,
+          16.732,
+          2.649
+        ],
+        "nearest_mesh_pt": [
+          47.129,
+          16.732,
+          0.0
+        ],
+        "clearance_m": 2.649,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 39,
+        "segment": "K09_to_K010",
+        "position": [
+          47.302,
+          16.498,
+          2.722
+        ],
+        "nearest_mesh_pt": [
+          47.302,
+          16.498,
+          0.0
+        ],
+        "clearance_m": 2.722,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 40,
+        "segment": "K09_to_K010",
+        "position": [
+          47.477,
+          16.265,
+          2.792
+        ],
+        "nearest_mesh_pt": [
+          47.477,
+          16.265,
+          0.0
+        ],
+        "clearance_m": 2.792,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 41,
+        "segment": "K09_to_K010",
+        "position": [
+          47.654,
+          16.033,
+          2.859
+        ],
+        "nearest_mesh_pt": [
+          47.654,
+          16.033,
+          0.0
+        ],
+        "clearance_m": 2.859,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 42,
+        "segment": "K09_to_K010",
+        "position": [
+          47.833,
+          15.805,
+          2.922
+        ],
+        "nearest_mesh_pt": [
+          47.833,
+          15.805,
+          0.0
+        ],
+        "clearance_m": 2.922,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 43,
+        "segment": "K09_to_K010",
+        "position": [
+          48.017,
+          15.58,
+          2.981
+        ],
+        "nearest_mesh_pt": [
+          48.017,
+          15.58,
+          0.0
+        ],
+        "clearance_m": 2.981,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 44,
+        "segment": "K09_to_K010",
+        "position": [
+          48.206,
+          15.361,
+          3.035
+        ],
+        "nearest_mesh_pt": [
+          48.206,
+          15.361,
+          0.0
+        ],
+        "clearance_m": 3.035,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 45,
+        "segment": "K09_to_K010",
+        "position": [
+          48.4,
+          15.147,
+          3.082
+        ],
+        "nearest_mesh_pt": [
+          48.4,
+          15.147,
+          0.0
+        ],
+        "clearance_m": 3.082,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 46,
+        "segment": "K09_to_K010",
+        "position": [
+          48.602,
+          14.94,
+          3.122
+        ],
+        "nearest_mesh_pt": [
+          48.602,
+          14.94,
+          0.0
+        ],
+        "clearance_m": 3.122,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 47,
+        "segment": "K09_to_K010",
+        "position": [
+          48.812,
+          14.741,
+          3.155
+        ],
+        "nearest_mesh_pt": [
+          48.812,
+          14.741,
+          0.0
+        ],
+        "clearance_m": 3.155,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 48,
+        "segment": "K09_to_K010",
+        "position": [
+          49.031,
+          14.55,
+          3.18
+        ],
+        "nearest_mesh_pt": [
+          49.031,
+          14.55,
+          0.0
+        ],
+        "clearance_m": 3.18,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 49,
+        "segment": "K09_to_K010",
+        "position": [
+          49.26,
+          14.37,
+          3.195
+        ],
+        "nearest_mesh_pt": [
+          49.26,
+          14.37,
+          0.0
+        ],
+        "clearance_m": 3.195,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 50,
+        "segment": "K10_to_K11",
+        "position": [
+          49.5,
+          14.2,
+          3.2
+        ],
+        "nearest_mesh_pt": [
+          49.5,
+          14.2,
+          0.0
+        ],
+        "clearance_m": 3.2,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 51,
+        "segment": "K10_to_K11",
+        "position": [
+          49.75,
+          14.039,
+          3.193
+        ],
+        "nearest_mesh_pt": [
+          49.75,
+          14.039,
+          0.0
+        ],
+        "clearance_m": 3.193,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 52,
+        "segment": "K10_to_K11",
+        "position": [
+          50.009,
+          13.886,
+          3.173
+        ],
+        "nearest_mesh_pt": [
+          50.009,
+          13.886,
+          0.0
+        ],
+        "clearance_m": 3.173,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 53,
+        "segment": "K10_to_K11",
+        "position": [
+          50.275,
+          13.738,
+          3.141
+        ],
+        "nearest_mesh_pt": [
+          50.275,
+          13.738,
+          0.0
+        ],
+        "clearance_m": 3.141,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 54,
+        "segment": "K10_to_K11",
+        "position": [
+          50.548,
+          13.596,
+          3.098
+        ],
+        "nearest_mesh_pt": [
+          50.548,
+          13.596,
+          0.0
+        ],
+        "clearance_m": 3.098,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 55,
+        "segment": "K10_to_K11",
+        "position": [
+          50.827,
+          13.459,
+          3.046
+        ],
+        "nearest_mesh_pt": [
+          50.827,
+          13.459,
+          0.0
+        ],
+        "clearance_m": 3.046,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 56,
+        "segment": "K10_to_K11",
+        "position": [
+          51.112,
+          13.328,
+          2.985
+        ],
+        "nearest_mesh_pt": [
+          51.112,
+          13.328,
+          0.0
+        ],
+        "clearance_m": 2.985,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 57,
+        "segment": "K10_to_K11",
+        "position": [
+          51.402,
+          13.2,
+          2.918
+        ],
+        "nearest_mesh_pt": [
+          51.402,
+          13.2,
+          0.0
+        ],
+        "clearance_m": 2.918,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 58,
+        "segment": "K10_to_K11",
+        "position": [
+          51.697,
+          13.077,
+          2.844
+        ],
+        "nearest_mesh_pt": [
+          51.697,
+          13.077,
+          0.0
+        ],
+        "clearance_m": 2.844,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 59,
+        "segment": "K10_to_K11",
+        "position": [
+          51.996,
+          12.958,
+          2.766
+        ],
+        "nearest_mesh_pt": [
+          51.996,
+          12.958,
+          0.0
+        ],
+        "clearance_m": 2.766,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 60,
+        "segment": "K10_to_K11",
+        "position": [
+          52.298,
+          12.842,
+          2.684
+        ],
+        "nearest_mesh_pt": [
+          52.298,
+          12.842,
+          0.0
+        ],
+        "clearance_m": 2.684,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 61,
+        "segment": "K10_to_K11",
+        "position": [
+          52.602,
+          12.728,
+          2.6
+        ],
+        "nearest_mesh_pt": [
+          52.602,
+          12.728,
+          0.0
+        ],
+        "clearance_m": 2.6,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 62,
+        "segment": "K10_to_K11",
+        "position": [
+          52.909,
+          12.617,
+          2.515
+        ],
+        "nearest_mesh_pt": [
+          52.909,
+          12.617,
+          0.0
+        ],
+        "clearance_m": 2.515,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 63,
+        "segment": "K10_to_K11",
+        "position": [
+          53.217,
+          12.508,
+          2.429
+        ],
+        "nearest_mesh_pt": [
+          53.217,
+          12.508,
+          0.0
+        ],
+        "clearance_m": 2.429,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 64,
+        "segment": "K10_to_K11",
+        "position": [
+          53.525,
+          12.401,
+          2.345
+        ],
+        "nearest_mesh_pt": [
+          53.525,
+          12.401,
+          0.0
+        ],
+        "clearance_m": 2.345,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 65,
+        "segment": "K10_to_K11",
+        "position": [
+          53.834,
+          12.294,
+          2.264
+        ],
+        "nearest_mesh_pt": [
+          53.834,
+          12.294,
+          0.0
+        ],
+        "clearance_m": 2.264,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 66,
+        "segment": "K10_to_K11",
+        "position": [
+          54.143,
+          12.189,
+          2.186
+        ],
+        "nearest_mesh_pt": [
+          54.143,
+          12.189,
+          0.0
+        ],
+        "clearance_m": 2.186,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 67,
+        "segment": "K10_to_K11",
+        "position": [
+          54.451,
+          12.083,
+          2.113
+        ],
+        "nearest_mesh_pt": [
+          54.451,
+          12.083,
+          0.0
+        ],
+        "clearance_m": 2.113,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 68,
+        "segment": "K10_to_K11",
+        "position": [
+          54.756,
+          11.978,
+          2.047
+        ],
+        "nearest_mesh_pt": [
+          54.756,
+          11.978,
+          0.0
+        ],
+        "clearance_m": 2.047,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 69,
+        "segment": "K10_to_K11",
+        "position": [
+          55.06,
+          11.872,
+          1.987
+        ],
+        "nearest_mesh_pt": [
+          55.06,
+          11.872,
+          0.0
+        ],
+        "clearance_m": 1.987,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 70,
+        "segment": "K10_to_K11",
+        "position": [
+          55.361,
+          11.765,
+          1.936
+        ],
+        "nearest_mesh_pt": [
+          55.361,
+          11.765,
+          0.0
+        ],
+        "clearance_m": 1.936,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 71,
+        "segment": "K10_to_K11",
+        "position": [
+          55.658,
+          11.656,
+          1.895
+        ],
+        "nearest_mesh_pt": [
+          55.658,
+          11.656,
+          0.0
+        ],
+        "clearance_m": 1.895,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 72,
+        "segment": "K10_to_K11",
+        "position": [
+          55.951,
+          11.546,
+          1.864
+        ],
+        "nearest_mesh_pt": [
+          55.951,
+          11.546,
+          0.0
+        ],
+        "clearance_m": 1.864,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 73,
+        "segment": "K10_to_K11",
+        "position": [
+          56.24,
+          11.434,
+          1.846
+        ],
+        "nearest_mesh_pt": [
+          56.24,
+          11.434,
+          0.0
+        ],
+        "clearance_m": 1.846,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 74,
+        "segment": "K10_to_K11",
+        "position": [
+          56.523,
+          11.318,
+          1.841
+        ],
+        "nearest_mesh_pt": [
+          56.523,
+          11.318,
+          0.0
+        ],
+        "clearance_m": 1.841,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 75,
+        "segment": "K11_to_K12",
+        "position": [
+          56.8,
+          11.2,
+          1.85
+        ],
+        "nearest_mesh_pt": [
+          56.8,
+          11.2,
+          0.0
+        ],
+        "clearance_m": 1.85,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 76,
+        "segment": "K11_to_K12",
+        "position": [
+          57.073,
+          11.08,
+          1.873
+        ],
+        "nearest_mesh_pt": [
+          57.073,
+          11.08,
+          0.0
+        ],
+        "clearance_m": 1.873,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 77,
+        "segment": "K11_to_K12",
+        "position": [
+          57.342,
+          10.96,
+          1.906
+        ],
+        "nearest_mesh_pt": [
+          57.342,
+          10.96,
+          0.0
+        ],
+        "clearance_m": 1.906,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 78,
+        "segment": "K11_to_K12",
+        "position": [
+          57.61,
+          10.84,
+          1.949
+        ],
+        "nearest_mesh_pt": [
+          57.61,
+          10.84,
+          0.0
+        ],
+        "clearance_m": 1.949,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 79,
+        "segment": "K11_to_K12",
+        "position": [
+          57.875,
+          10.72,
+          2.002
+        ],
+        "nearest_mesh_pt": [
+          57.875,
+          10.72,
+          0.0
+        ],
+        "clearance_m": 2.002,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 80,
+        "segment": "K11_to_K12",
+        "position": [
+          58.138,
+          10.6,
+          2.063
+        ],
+        "nearest_mesh_pt": [
+          58.138,
+          10.6,
+          0.0
+        ],
+        "clearance_m": 2.063,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 81,
+        "segment": "K11_to_K12",
+        "position": [
+          58.398,
+          10.48,
+          2.132
+        ],
+        "nearest_mesh_pt": [
+          58.398,
+          10.48,
+          0.0
+        ],
+        "clearance_m": 2.132,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 82,
+        "segment": "K11_to_K12",
+        "position": [
+          58.657,
+          10.36,
+          2.208
+        ],
+        "nearest_mesh_pt": [
+          58.657,
+          10.36,
+          0.0
+        ],
+        "clearance_m": 2.208,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 83,
+        "segment": "K11_to_K12",
+        "position": [
+          58.915,
+          10.24,
+          2.291
+        ],
+        "nearest_mesh_pt": [
+          58.915,
+          10.24,
+          0.0
+        ],
+        "clearance_m": 2.291,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 84,
+        "segment": "K11_to_K12",
+        "position": [
+          59.17,
+          10.12,
+          2.38
+        ],
+        "nearest_mesh_pt": [
+          59.17,
+          10.12,
+          0.0
+        ],
+        "clearance_m": 2.38,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 85,
+        "segment": "K11_to_K12",
+        "position": [
+          59.425,
+          10.0,
+          2.474
+        ],
+        "nearest_mesh_pt": [
+          59.425,
+          10.0,
+          0.0
+        ],
+        "clearance_m": 2.474,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 86,
+        "segment": "K11_to_K12",
+        "position": [
+          59.678,
+          9.88,
+          2.573
+        ],
+        "nearest_mesh_pt": [
+          59.678,
+          9.88,
+          0.0
+        ],
+        "clearance_m": 2.573,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 87,
+        "segment": "K11_to_K12",
+        "position": [
+          59.93,
+          9.76,
+          2.676
+        ],
+        "nearest_mesh_pt": [
+          59.93,
+          9.76,
+          0.0
+        ],
+        "clearance_m": 2.676,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 88,
+        "segment": "K11_to_K12",
+        "position": [
+          60.182,
+          9.64,
+          2.781
+        ],
+        "nearest_mesh_pt": [
+          60.182,
+          9.64,
+          0.0
+        ],
+        "clearance_m": 2.781,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 89,
+        "segment": "K11_to_K12",
+        "position": [
+          60.433,
+          9.52,
+          2.89
+        ],
+        "nearest_mesh_pt": [
+          60.433,
+          9.52,
+          0.0
+        ],
+        "clearance_m": 2.89,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 90,
+        "segment": "K11_to_K12",
+        "position": [
+          60.683,
+          9.4,
+          3.0
+        ],
+        "nearest_mesh_pt": [
+          60.683,
+          9.4,
+          0.0
+        ],
+        "clearance_m": 3.0,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 91,
+        "segment": "K11_to_K12",
+        "position": [
+          60.933,
+          9.28,
+          3.111
+        ],
+        "nearest_mesh_pt": [
+          60.933,
+          9.28,
+          0.0
+        ],
+        "clearance_m": 3.111,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 92,
+        "segment": "K11_to_K12",
+        "position": [
+          61.183,
+          9.16,
+          3.222
+        ],
+        "nearest_mesh_pt": [
+          63.506,
+          8.764,
+          1.329
+        ],
+        "clearance_m": 3.023,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 93,
+        "segment": "K11_to_K12",
+        "position": [
+          61.433,
+          9.04,
+          3.334
+        ],
+        "nearest_mesh_pt": [
+          63.659,
+          8.693,
+          1.531
+        ],
+        "clearance_m": 2.885,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 94,
+        "segment": "K11_to_K12",
+        "position": [
+          61.684,
+          8.92,
+          3.444
+        ],
+        "nearest_mesh_pt": [
+          64.269,
+          8.342,
+          3.444
+        ],
+        "clearance_m": 2.649,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 95,
+        "segment": "K11_to_K12",
+        "position": [
+          61.934,
+          8.8,
+          3.553
+        ],
+        "nearest_mesh_pt": [
+          64.269,
+          8.342,
+          3.553
+        ],
+        "clearance_m": 2.379,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 96,
+        "segment": "K11_to_K12",
+        "position": [
+          62.186,
+          8.68,
+          3.66
+        ],
+        "nearest_mesh_pt": [
+          64.269,
+          8.342,
+          3.66
+        ],
+        "clearance_m": 2.111,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 97,
+        "segment": "K11_to_K12",
+        "position": [
+          62.438,
+          8.56,
+          3.764
+        ],
+        "nearest_mesh_pt": [
+          64.269,
+          8.342,
+          3.764
+        ],
+        "clearance_m": 1.844,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 98,
+        "segment": "K11_to_K12",
+        "position": [
+          62.691,
+          8.44,
+          3.864
+        ],
+        "nearest_mesh_pt": [
+          64.269,
+          8.342,
+          3.864
+        ],
+        "clearance_m": 1.581,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 99,
+        "segment": "K11_to_K12",
+        "position": [
+          62.945,
+          8.32,
+          3.959
+        ],
+        "nearest_mesh_pt": [
+          64.269,
+          8.342,
+          3.959
+        ],
+        "clearance_m": 1.325,
+        "status": "CLEAR"
+      },
+      {
+        "sample_idx": 100,
+        "segment": "K12_endpoint",
+        "position": [
+          63.2,
+          8.2,
+          4.05
+        ],
+        "nearest_mesh_pt": [
+          64.269,
+          8.342,
+          4.05
+        ],
+        "clearance_m": 1.078,
+        "status": "CLEAR"
+      }
+    ]
+  }
+}
