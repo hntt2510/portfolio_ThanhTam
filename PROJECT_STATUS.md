@@ -14,8 +14,8 @@
 | 02A — Profile Gallery Blender Architecture & GLB | Committed & Verified | `956746b`, `design-handoff/milestone-02/` contains `profile-gallery.blend`, `profile-gallery.glb` (126.66 KB), `generate_profile_gallery.py`, proof renders `camera-K05.png`–`K08.png`, `top-down-layout.png`, `seam-continuity.png`, `asset-report-02A.md` | Ready for Milestone 02B (Three.js integration) |
 | 02B — Profile Gallery Three.js Integration & UI | Committed & Verified | `dca778b`, `profile-gallery.glb` integrated in `src/scenes/profile-gallery.js`, `src/world.js` dual-scene manager, `src/camera-controller.js` continuous K01–K08 spline, 4 narrative beats in `index.html` & `styles.css`, chapter schedule in `app.js`, 9 Playwright verification screenshots in `design-handoff/milestone-02/screenshots/`, report in `verification-report.md` | Superseded by visual polish in Milestone 02C & 02D |
 | 02C — Profile Gallery Visual Polish & C1 Motion | Committed & Verified | `7ff7a5e`, unboxed editorial UI, 11 bays with slim mullions, master spline C1 continuity | Superseded by visual fidelity pass in Milestone 02D |
-| 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in erification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
-| 03 — Core Expertise Design & Visual Planning | **Candidate A V2 APPROVED; 03A Blender production authorized; 03B pending** | design-handoff/milestone-03/ complete V2 redesign package: 6 V2 specs, 3 concept candidate renders, side-by-side Scene 02 audit, 8 visual reference boards in isual-references/, 3D blend model, verified V2 acceptance matrix | Owner approved Candidate A for 03A Blender production only; 03B must wait for production render review |
+| 02D — Profile Gallery Visual Fidelity Pass | **Technical delivery complete; owner visual sign-off pending** | Sculpted arch portal, botanical multi-scale trees, 3.5cm ultra-slim silver mullions, polished travertine floor sheen, high-contrast brand typography (#111827), 12 Playwright screenshots, report in verification-report.md | Independent review found remaining fidelity gap vs approved V2 reference; owner visual sign-off pending. Scene 03 design planning may proceed. |
+| 03 — Core Expertise Architecture (03A) | **03A asset produced, awaiting visual owner review / 03B not implemented** | `design-handoff/milestone-03/production/` contains `expertise-in-motion.blend`, `expertise-in-motion.glb` (38.66 KB), `generate_expertise_in_motion.py`, proof renders `camera-K08-seam.png`–`K12-bridge.png`, `top-down-layout.png`, `portal-seam-detail.png`, 4 mobile portrait renders, `asset-report-03A.md`, `03A-PREFLIGHT.md` | Stop for owner visual review before Milestone 03B Three.js runtime integration |
 
 ## Approved design constraints
 
@@ -116,13 +116,36 @@
   - Archival 3D blend file: `scene03-v2-exploration.blend`.
   - Comprehensive documentation index: `REFERENCE-INDEX-V2.md`.
 
-## Next task — Milestone 03A: Core Expertise Blender Architecture
+## Milestone 03A Delivery Summary (2026-11-04) — Blender Production & GLB Export
 
-1. Await portfolio owner review and visual approval of Milestone 03 design handoff package.
-2. Upon approval, proceed to Milestone 03A:
-   - Procedural Blender generation script `generate_expertise_rotunda.py`.
-   - Export production `expertise-rotunda.glb` ($\le 1.50\text{ MB}$, target $\approx 9,400$ triangles).
-   - Headless proof renders from Blender.
+- **Hard Preflight Passed (`03A-PREFLIGHT.md`):** Audited `src/camera-controller.js` and confirmed runtime FOV truth is **48.0° desktop / 50.0° mobile**. Reconciled anchor coordinates at $(43.24, 0.00, -19.98)$ with zero runtime edits.
+- **Master Production 3D Environment:** Created `design-handoff/milestone-03/production/expertise-in-motion.blend` via reproducible automation script `generate_expertise_in_motion.py` in Blender 5.2.3 LTS.
+- **Physical Watertight Seam:** Built `EXPM_Portal_EntryVestibule` with 20cm physical overlap along the corridor exit tangent vector, eliminating light leakage and geometry gaps.
+- **Physical Spatial Metaphors for Competencies:**
+  - **Zone 1 (Business Analysis):** Inlaid dark basalt paths and brushed silver rails branching across light travertine floor (As-Is to To-Be). Framed in K10 elevated oblique view ($Z=3.20\text{m}$, pitch $-22^\circ$).
+  - **Zone 2 (SAP & Enterprise Systems):** 4x2x3 bay modular structural matrix of brushed aluminum beams and 10 nested frosted glass functional volumes. Framed in K11 side-tracking parallax view ($Z=1.85\text{m}$).
+  - **Zone 3 (Solution Consulting):** 14m suspended pedestrian bridge deck ($Z=2.40\text{m}$) crossing open space with low-iron glass balustrades toward the Scene 04 portal. Framed in K12 elevated bridge glide ($Z=4.05\text{m}$).
+- **GLB Export & Validation:**
+  - Exported `design-handoff/milestone-03/production/expertise-in-motion.glb`.
+  - File size: **38.66 KB** (well within $\le 1,200\text{ KB}$ budget).
+  - Geometry: **12 meshes**, **756 polygons**, **1,054 vertices** (target: $\le 6,800$ triangles).
+  - Hierarchy: 100% prefixed with `EXPM_`.
+  - PBR Materials: 6 valid materials (warm white plaster, travertine stone, clear glass, frosted glass, brushed aluminum, dark basalt).
+  - Cleanliness: **0 cameras, 0 lights, 0 baked text/card UI**.
+  - Re-import script verified scale, normals, bounds, and watertightness.
+- **Camera Clearance:** Verified zero collision across interpolated trajectory $K08 \to K12$.
+- **Render Proof:** Generated 11 full-resolution render artifacts in `design-handoff/milestone-03/production/renders/` (K08 seam, K09 reveal, K10 process paths, K11 system spine, K12 bridge, top-down layout, portal seam detail, and mobile portrait compositions K09–K12).
+- **Scope Boundary:** Milestone 03A only. No runtime Three.js code, camera controller, HTML, or CSS touched. Stop for owner visual review.
+
+## Next task — Milestone 03B: Core Expertise Three.js Integration & UI (Pending Owner 03A Visual Sign-off)
+
+1. Await portfolio owner review and visual approval of Milestone 03A production renders and asset report.
+2. Upon approval, proceed to Milestone 03B:
+   - Load `expertise-in-motion.glb` into `src/world.js` and configure glass material properties.
+   - Extend `src/camera-controller.js` with waypoints K09–K12 using verified coordinates.
+   - Implement unboxed editorial HTML/CSS overlays for Business Analysis, SAP/ERP, and Solution Consulting.
+   - Update scroll schedule (32%–52%) and right-side chapter navigation dot for `03 Expertise`.
+   - Validate desktop/mobile responsive rendering and forward/reverse scroll performance.
 3. Automatically commit and push per `AGENTS.md`.
 
 ## GitHub publishing rules
